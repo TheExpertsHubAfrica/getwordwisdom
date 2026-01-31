@@ -22,11 +22,9 @@ const API = {
             
             const url = `${CONFIG.API_URL}?${params.toString()}`;
 
+            // GET requests don't need headers - keep it simple to avoid CORS preflight
             const options = {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                method: 'GET'
             };
 
             const response = await fetch(url, options);

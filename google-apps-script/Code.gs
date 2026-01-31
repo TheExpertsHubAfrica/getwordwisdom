@@ -257,36 +257,16 @@ function doGet(e) {
 
 // ==================== RESPONSE HELPER ====================
 
-function getOrigin(e) {
-  // Get the origin from the request
-  try {
-    const origin = e && e.parameter && e.parameter.origin ? e.parameter.origin : null;
-    if (origin && ALLOWED_ORIGINS.includes(origin)) {
-      return origin;
-    }
-  } catch (err) {
-    Logger.log('Error getting origin: ' + err);
-  }
-  // Default to wildcard for all allowed origins
-  return '*';
-}
-
 function createResponse(data) {
   return ContentService.createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);
 }
 
 function doOptions(e) {
-  // Handle CORS preflight requests for POST methods
-  const allowedOrigin = getOrigin(e);
+  // Handle CORS preflight requests
+  // Google Apps Script automatically handles CORS, but we're being explicit
   return ContentService.createTextOutput('')
-    .setMimeType(ContentService.MimeType.TEXT)
-    .setHeaders({
-      'Access-Control-Allow-Origin': allowedOrigin,
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Max-Age': '86400'
-    });
+    .setMimeType(ContentService.MimeType.TEXT);
 }
 
 // ==================== PUBLIC ENDPOINTS ====================
