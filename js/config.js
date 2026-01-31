@@ -6,7 +6,7 @@
 const CONFIG = {
     // Google Apps Script Web App URL
     // Replace this with your actual deployed Google Apps Script web app URL
-    API_URL: 'https://script.google.com/macros/s/AKfycbwyfmRtb6G4q10SoKm3ZRYqZCrtUakePHFEwat-KZmmb2VbB_pejih0Ab-yRuJBMA-HYQ/exec',
+    API_URL: 'https://script.google.com/macros/s/AKfycbw8hizz14V_Gy5Hp_IPGgi58RgbShcHIm-m95mNT018YpeOp1pQBmPdSbZjHDaNNqMJFQ/exec',
     
     // Pagination settings
     POSTS_PER_PAGE: 9,
@@ -15,7 +15,7 @@ const CONFIG = {
     FEATURED_POSTS_LIMIT: 5,
     
     // Image settings
-    DEFAULT_IMAGE: '/assets/default-post-image.jpg',
+    DEFAULT_IMAGE: 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=800&h=400&fit=crop',
     
     // Categories
     CATEGORIES: [

@@ -80,7 +80,7 @@ function setupSheets() {
         'welcome-to-getwordwisdom',
         '<p>Welcome to GetWordWisdom! We are excited to share faith, wisdom, and daily devotionals with you. This blog is dedicated to helping believers grow in their relationship with Christ.</p><blockquote>"For the Lord gives wisdom; from his mouth come knowledge and understanding." - Proverbs 2:6</blockquote>',
         'Faith',
-        'https://via.placeholder.com/800x400/2c3e50/ffffff?text=Welcome+to+GetWordWisdom',
+        'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=800&h=400&fit=crop',
         'Admin',
         'published',
         'true',
@@ -699,12 +699,20 @@ function handleAdminUploadImage(data) {
     // Make file publicly accessible
     file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
     
-    // Get public URL
-    const imageUrl = `https://drive.google.com/uc?export=view&id=${file.getId()}`;
+    // Get file ID
+    const fileId = file.getId();
+    
+    // Return multiple URL formats for compatibility
+    // The lh3.googleusercontent.com format works better for embedding
+    const imageUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
+    const alternateUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
     
     return createResponse({
       success: true,
-      imageUrl: imageUrl
+      imageUrl: imageUrl,
+      alternateUrl: alternateUrl,
+      fileId: fileId,
+      message: 'Image uploaded successfully. If image does not display, try using the alternate URL or consider using an image hosting service like Unsplash or ImgBB.'
     });
   } catch (error) {
     Logger.log('Error uploading image: ' + error.toString());

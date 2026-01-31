@@ -51,11 +51,10 @@ const API = {
      */
     async postRequest(endpoint, data = {}) {
         try {
+            // Remove Content-Type header to avoid CORS preflight
+            // Google Apps Script will handle the JSON parsing
             const options = {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
                 body: JSON.stringify({
                     action: endpoint,
                     origin: window.location.origin,
