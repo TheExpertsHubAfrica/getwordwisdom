@@ -6,7 +6,7 @@
 const CONFIG = {
     // Google Apps Script Web App URL
     // Replace this with your actual deployed Google Apps Script web app URL
-    API_URL: 'https://script.google.com/macros/s/AKfycbzRyy0yV4fGGo_5N275ctNQ9yQgnjuWaGMgk-2akA-OJH10N6Zbip7uIXzXSSeHnjBxIg/exec',
+    API_URL: 'https://script.google.com/macros/s/AKfycbzvFed03vzBKBUw8SQuKJUg716TDh8dmVaDTw7p9Iyudp3_ykBk3JJ1qzBb5QjJgE5_eA/exec',
     
     // Pagination settings
     POSTS_PER_PAGE: 9,

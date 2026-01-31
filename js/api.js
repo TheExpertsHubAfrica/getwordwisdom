@@ -11,27 +11,61 @@ const API = {
      * @param {string} method - HTTP method (GET or POST)
      * @returns {Promise<object>} - The response data
      */
-    async request(endpoint, data = {}, method = 'POST') {
+    async request(endpoint, data = {}, method = 'GET') {
         try {
-            const url = method === 'GET' && Object.keys(data).length > 0
-                ? `${CONFIG.API_URL}?${new URLSearchParams(data)}`
-                : CONFIG.API_URL;
+            // Build URL with query parameters for GET requests
+            const params = new URLSearchParams({
+                action: endpoint,
+                origin: window.location.origin,
+                ...data
+            });
+            
+            const url = `${CONFIG.API_URL}?${params.toString()}`;
 
             const options = {
-                method: method,
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
             };
 
-            if (method === 'POST') {
-                options.body = JSON.stringify({
-                    action: endpoint,
-                    ...data
-                });
+            const response = await fetch(url, options);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const response = await fetch(url, options);
+            const result = await response.json();
+            
+            if (result.error) {
+                throw new Error(result.error);
+            }
+
+            return result;
+        } catch (error) {
+            console.error('API Request Error:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Make a POST request (for admin operations and form submissions)
+     */
+    async postRequest(endpoint, data = {}) {
+        try {
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    action: endpoint,
+                    origin: window.location.origin,
+                    ...data
+                })
+            };
+
+            const response = await fetch(CONFIG.API_URL, options);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -101,7 +135,7 @@ const API = {
      * @returns {Promise<object>} - Success message
      */
     async subscribe(email) {
-        return this.request('subscribe', { email });
+        return this.postRequest('subscribe', { email });
     },
 
     /**
@@ -110,7 +144,7 @@ const API = {
      * @returns {Promise<object>} - Success message
      */
     async submitContact(formData) {
-        return this.request('submitContact', formData);
+        return this.postRequest('submitContact', formData);
     },
 
     /**
@@ -120,7 +154,7 @@ const API = {
      * @returns {Promise<object>} - Auth token and user data
      */
     async adminLogin(email, password) {
-        return this.request('adminLogin', { email, password });
+        return this.postRequest('adminLogin', { email, password });
     },
 
     /**
@@ -129,7 +163,7 @@ const API = {
      * @returns {Promise<object>} - User data
      */
     async verifyAdminSession(token) {
-        return this.request('verifyAdminSession', { token });
+        return this.postRequest('verifyAdminSession', { token });
     },
 
     /**
@@ -138,7 +172,7 @@ const API = {
      * @returns {Promise<array>} - All posts
      */
     async adminGetAllPosts(token) {
-        return this.request('adminGetAllPosts', { token });
+        return this.postRequest('adminGetAllPosts', { token });
     },
 
     /**
@@ -148,7 +182,7 @@ const API = {
      * @returns {Promise<object>} - Success message
      */
     async adminSavePost(token, postData) {
-        return this.request('adminSavePost', { token, postData });
+        return this.postRequest('adminSavePost', { token, postData });
     },
 
     /**
@@ -158,7 +192,7 @@ const API = {
      * @returns {Promise<object>} - Success message
      */
     async adminDeletePost(token, postId) {
-        return this.request('adminDeletePost', { token, postId });
+        return this.postRequest('adminDeletePost', { token, postId });
     },
 
     /**
@@ -169,7 +203,7 @@ const API = {
      * @returns {Promise<object>} - Image URL
      */
     async adminUploadImage(token, base64Data, filename) {
-        return this.request('adminUploadImage', { token, base64Data, filename });
+        return this.postRequest('adminUploadImage', { token, base64Data, filename });
     },
 
     /**
@@ -178,7 +212,7 @@ const API = {
      * @returns {Promise<array>} - All subscribers
      */
     async adminGetSubscribers(token) {
-        return this.request('adminGetSubscribers', { token });
+        return this.postRequest('adminGetSubscribers', { token });
     },
 
     /**
@@ -189,6 +223,6 @@ const API = {
      * @returns {Promise<object>} - Success message
      */
     async adminToggleSubscriber(token, subscriberId, status) {
-        return this.request('adminToggleSubscriber', { token, subscriberId, status });
+        return this.postRequest('adminToggleSubscriber', { token, subscriberId, status });
     }
 };

@@ -13,8 +13,19 @@
 
 // ==================== CONFIGURATION ====================
 
-const MAIN_SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID_HERE'; // The main spreadsheet ID
-const DRIVE_FOLDER_ID = 'YOUR_GOOGLE_DRIVE_FOLDER_ID'; // Folder for images
+const MAIN_SPREADSHEET_ID = '1eq6bioK_hMWP5P0yAgGoYmuR4uOdlVXsT9AicnY1xT0'; // The main spreadsheet ID
+const DRIVE_FOLDER_ID = '1OJ9FdUAzJthNM92CTdmXWjR0Ar5h27Z5'; // Folder for images
+
+// Allowed origins for CORS
+const ALLOWED_ORIGINS = [
+  'https://getwordwisdom.vercel.app',
+  'http://localhost:8000',
+  'http://localhost:5500',
+  'http://localhost:5501',
+  'http://127.0.0.1:8000',
+  'http://127.0.0.1:5500',
+  'http://127.0.0.1:5501'
+];
 
 // Sheet names (will be created automatically by setupSheets())
 const SHEET_NAMES = {
@@ -212,16 +223,70 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  return ContentService.createTextOutput(JSON.stringify({
-    status: 'GetWordWisdom API is running'
-  })).setMimeType(ContentService.MimeType.JSON);
+  try {
+    // Support GET requests for public endpoints
+    const action = e.parameter.action;
+    
+    if (!action) {
+      return createResponse({
+        status: 'GetWordWisdom API is running',
+        message: 'Use ?action=getPosts to test'
+      });
+    }
+    
+    // Route GET requests
+    switch (action) {
+      case 'getPosts':
+        return handleGetPosts(e.parameter);
+      case 'getFeaturedPosts':
+        return handleGetFeaturedPosts(e.parameter);
+      case 'getPostBySlug':
+        return handleGetPostBySlug(e.parameter);
+      case 'getPostsByCategory':
+        return handleGetPostsByCategory(e.parameter);
+      case 'getCategoryCounts':
+        return handleGetCategoryCounts();
+      default:
+        return createResponse({ error: 'Invalid action or method not allowed' });
+    }
+  } catch (error) {
+    Logger.log('Error in doGet: ' + error.toString());
+    return createResponse({ error: error.toString() });
+  }
 }
 
 // ==================== RESPONSE HELPER ====================
 
+function getOrigin(e) {
+  // Get the origin from the request
+  try {
+    const origin = e && e.parameter && e.parameter.origin ? e.parameter.origin : null;
+    if (origin && ALLOWED_ORIGINS.includes(origin)) {
+      return origin;
+    }
+  } catch (err) {
+    Logger.log('Error getting origin: ' + err);
+  }
+  // Default to wildcard for all allowed origins
+  return '*';
+}
+
 function createResponse(data) {
   return ContentService.createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doOptions(e) {
+  // Handle CORS preflight requests for POST methods
+  const allowedOrigin = getOrigin(e);
+  return ContentService.createTextOutput('')
+    .setMimeType(ContentService.MimeType.TEXT)
+    .setHeaders({
+      'Access-Control-Allow-Origin': allowedOrigin,
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Max-Age': '86400'
+    });
 }
 
 // ==================== PUBLIC ENDPOINTS ====================
