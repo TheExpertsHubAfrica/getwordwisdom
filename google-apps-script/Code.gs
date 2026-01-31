@@ -803,23 +803,106 @@ function isValidEmail(email) {
  */
 function sendWelcomeEmail(email) {
   try {
-    const subject = 'Welcome to GetWordWisdom';
-    const body = `
-Thank you for subscribing to GetWordWisdom!
+    const subject = 'Welcome to GetWordWisdom - Your Journey in Faith Begins';
+    
+    const htmlBody = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          body { margin: 0; padding: 0; font-family: Georgia, 'Times New Roman', serif; background-color: #faf9f7; }
+          .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+          .header { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); padding: 40px 20px; text-align: center; }
+          .header h1 { color: #ffffff; margin: 0; font-size: 28px; font-weight: 600; }
+          .header p { color: #c9a66b; margin: 10px 0 0 0; font-size: 14px; font-style: italic; }
+          .content { padding: 40px 30px; color: #333333; line-height: 1.8; }
+          .content h2 { color: #2c3e50; font-size: 22px; margin-bottom: 20px; }
+          .content p { margin-bottom: 16px; font-size: 16px; }
+          .verse-box { background: linear-gradient(135deg, #f0ebe5 0%, #faf9f7 100%); border-left: 4px solid #c9a66b; padding: 20px; margin: 25px 0; border-radius: 8px; }
+          .verse-box p { margin: 0; font-style: italic; color: #555555; font-size: 15px; }
+          .verse-ref { text-align: right; color: #8b7355; font-size: 14px; font-weight: 600; margin-top: 10px; }
+          .cta-button { display: inline-block; background: linear-gradient(135deg, #8b7355 0%, #a68968 100%); color: #ffffff !important; padding: 14px 32px; text-decoration: none; border-radius: 6px; margin: 20px 0; font-weight: 600; font-size: 16px; box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3); }
+          .footer { background-color: #2c3e50; color: #ffffff; padding: 30px; text-align: center; font-size: 14px; }
+          .footer p { margin: 8px 0; opacity: 0.9; }
+          .footer a { color: #c9a66b; text-decoration: none; }
+          .divider { height: 2px; background: linear-gradient(90deg, transparent, #c9a66b, transparent); margin: 30px 0; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>GetWordWisdom</h1>
+            <p>Faith &bull; Wisdom &bull; Daily Devotionals</p>
+          </div>
+          <div class="content">
+            <h2>Welcome to Our Community of Faith!</h2>
+            <p>Dear Beloved in Christ,</p>
+            <p>We are absolutely <strong>thrilled</strong> to welcome you to the GetWordWisdom family! Your decision to join us marks the beginning of an enriching journey of faith, wisdom, and spiritual growth.</p>
+            
+            <div class="verse-box">
+              <p>"For the Lord gives wisdom; from His mouth come knowledge and understanding. He stores up sound wisdom for the upright; He is a shield to those who walk in integrity."</p>
+              <div class="verse-ref">&mdash; Proverbs 2:6-7 (ESV)</div>
+            </div>
+            
+            <p>As a subscriber, you'll receive:</p>
+            <ul style="margin: 20px 0; padding-left: 25px; line-height: 2;">
+              <li><strong>Weekly Devotionals</strong> to strengthen your faith</li>
+              <li><strong>Inspiring Articles</strong> on Christian living</li>
+              <li><strong>Biblical Wisdom</strong> for daily challenges</li>
+              <li><strong>Prayer Insights</strong> and spiritual teachings</li>
+            </ul>
+            
+            <div style="text-align: center; margin: 35px 0;">
+              <a href="https://getwordwisdom.vercel.app/blog/" class="cta-button">Explore Our Latest Articles</a>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <p style="font-size: 15px; color: #666;">May God bless you richly as we grow together in faith and wisdom. We're honored to walk alongside you in your spiritual journey.</p>
+            
+            <p style="margin-top: 30px;"><strong>In Christ's Love,</strong><br>The GetWordWisdom Team</p>
+          </div>
+          <div class="footer">
+            <p><strong>GetWordWisdom</strong></p>
+            <p>Sharing faith, wisdom, and devotionals to strengthen your walk with Christ</p>
+            <p style="margin-top: 20px; font-size: 12px; opacity: 0.7;">You're receiving this because you subscribed at GetWordWisdom</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+    
+    const plainBody = `
+Welcome to GetWordWisdom!
 
-We're thrilled to have you join our community of faith. You'll now receive our latest articles, devotionals, and teachings directly in your inbox.
+Dear Beloved in Christ,
 
-May God bless you richly as we grow together in faith and wisdom.
+We are absolutely thrilled to welcome you to the GetWordWisdom family! Your decision to join us marks the beginning of an enriching journey of faith, wisdom, and spiritual growth.
 
-In Christ,
-GetWordWisdom Team
+"For the Lord gives wisdom; from His mouth come knowledge and understanding. He stores up sound wisdom for the upright; He is a shield to those who walk in integrity." - Proverbs 2:6-7 (ESV)
+
+As a subscriber, you'll receive:
+* Weekly Devotionals to strengthen your faith
+* Inspiring Articles on Christian living
+* Biblical Wisdom for daily challenges
+* Prayer Insights and spiritual teachings
+
+May God bless you richly as we grow together in faith and wisdom. We're honored to walk alongside you in your spiritual journey.
+
+Explore our articles: https://getwordwisdom.vercel.app/blog/
+
+In Christ's Love,
+The GetWordWisdom Team
 
 ---
-To unsubscribe, please contact us at your-email@example.com
+You're receiving this because you subscribed at GetWordWisdom
     `.trim();
     
-    GmailApp.sendEmail(email, subject, body, {
-      name: 'GetWordWisdom'
+    GmailApp.sendEmail(email, subject, plainBody, {
+      name: 'GetWordWisdom',
+      htmlBody: htmlBody
     });
   } catch (error) {
     Logger.log('Error sending welcome email: ' + error.toString());
@@ -849,31 +932,74 @@ function sendNewPostNewsletter(postData) {
       ? content.substr(0, 200) + '...' 
       : content;
     
-    const postUrl = `YOUR_WEBSITE_URL/blog/post.html?slug=${postData.slug}`;
+    const postUrl = `https://getwordwisdom.vercel.app/blog/post.html?slug=${postData.slug}`;
     
-    const subject = `New Post: ${postData.title}`;
-    const body = `
-A new post has been published on GetWordWisdom!
+    const subject = `New on GetWordWisdom: ${postData.title}`;
+    
+    const htmlBody = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <style>
+          body { margin: 0; padding: 0; font-family: Georgia, 'Times New Roman', serif; background-color: #faf9f7; }
+          .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+          .header { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); padding: 30px 20px; text-align: center; }
+          .header h1 { color: #ffffff; margin: 0; font-size: 24px; }
+          .badge { display: inline-block; background: #c9a66b; color: #ffffff; padding: 6px 14px; border-radius: 20px; font-size: 12px; margin-top: 10px; font-weight: 600; text-transform: uppercase; }
+          .content { padding: 40px 30px; }
+          .post-title { color: #2c3e50; font-size: 26px; margin-bottom: 15px; line-height: 1.3; }
+          .post-meta { color: #8b7355; font-size: 14px; margin-bottom: 20px; }
+          .post-excerpt { color: #555555; line-height: 1.8; font-size: 16px; margin: 20px 0; }
+          .cta-button { display: inline-block; background: linear-gradient(135deg, #8b7355 0%, #a68968 100%); color: #ffffff !important; padding: 14px 32px; text-decoration: none; border-radius: 6px; margin: 25px 0; font-weight: 600; box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3); }
+          .footer { background-color: #2c3e50; color: #ffffff; padding: 25px; text-align: center; font-size: 13px; }
+          .footer p { margin: 5px 0; opacity: 0.9; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>GetWordWisdom</h1>
+            <div class="badge">New Article Published</div>
+          </div>
+          <div class="content">
+            <h2 class="post-title">${postData.title}</h2>
+            <div class="post-meta">${postData.category} &bull; By ${postData.author}</div>
+            <div class="post-excerpt">${excerpt}</div>
+            <div style="text-align: center;">
+              <a href="${postUrl}" class="cta-button">Read Full Article &rarr;</a>
+            </div>
+          </div>
+          <div class="footer">
+            <p><strong>GetWordWisdom</strong></p>
+            <p>Sharing faith, wisdom, and devotionals daily</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+    
+    const plainBody = `
+New Article Published on GetWordWisdom!
 
 ${postData.title}
-Category: ${postData.category}
+Category: ${postData.category} | By ${postData.author}
 
 ${excerpt}
 
-Read more: ${postUrl}
+Read the full article: ${postUrl}
 
 ---
-Blessings,
+Blessings in Christ,
 GetWordWisdom Team
-
-To unsubscribe, please contact us.
     `.trim();
     
     // Send to each subscriber (in batches to avoid quota limits)
     subscribers.forEach(email => {
       try {
-        GmailApp.sendEmail(email, subject, body, {
-          name: 'GetWordWisdom'
+        GmailApp.sendEmail(email, subject, plainBody, {
+          name: 'GetWordWisdom',
+          htmlBody: htmlBody
         });
       } catch (error) {
         Logger.log(`Error sending to ${email}: ` + error.toString());

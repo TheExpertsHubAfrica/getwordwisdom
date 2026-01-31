@@ -97,6 +97,7 @@ async function loadPosts() {
 
     } catch (error) {
         console.error('Error loading posts:', error);
+        errorDiv.querySelector('p').textContent = "We're experiencing difficulty loading articles at the moment. Please refresh the page or try again shortly.";
         errorDiv.style.display = 'block';
         container.innerHTML = '';
         paginationDiv.innerHTML = '';

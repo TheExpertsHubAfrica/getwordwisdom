@@ -62,6 +62,7 @@ async function loadFeaturedPosts() {
 
     } catch (error) {
         console.error('Error loading featured posts:', error);
+        errorDiv.querySelector('p').textContent = 'We encountered an issue while loading featured articles. Please try refreshing the page.';
         errorDiv.style.display = 'block';
         container.innerHTML = '';
     }

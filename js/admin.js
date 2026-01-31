@@ -402,6 +402,10 @@ function openPostEditor(post = null) {
     } else {
         // Create mode
         title.textContent = 'Create New Post';
+        document.getElementById('post-id').value = ''; // Ensure ID is empty for new posts
+        // Set default author from session storage or use 'Admin'
+        const adminEmail = sessionStorage.getItem(CONFIG.STORAGE_KEYS.ADMIN_EMAIL) || 'Admin';
+        document.getElementById('post-author').value = adminEmail;
     }
 
     modal.classList.add('active');
@@ -448,7 +452,7 @@ async function handleSavePost(event) {
 
     // Get form data
     const postData = {
-        id: document.getElementById('post-id').value || null,
+        id: document.getElementById('post-id').value.trim() || '', // Trim and default to empty string
         title: document.getElementById('post-title').value.trim(),
         slug: document.getElementById('post-slug').value.trim(),
         category: document.getElementById('post-category').value,
@@ -458,6 +462,11 @@ async function handleSavePost(event) {
         isFeatured: document.getElementById('post-featured').checked ? 'TRUE' : 'FALSE',
         featuredImage: currentEditingPost?.featuredImage || ''
     };
+    
+    // If id is empty, set to null so backend creates new post
+    if (!postData.id) {
+        postData.id = null;
+    }
 
     // Validate required fields
     if (!postData.title || !postData.slug || !postData.category || !postData.author || !postData.content) {

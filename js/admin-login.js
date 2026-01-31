@@ -99,7 +99,10 @@ async function handleLoginSubmit(event) {
 
     } catch (error) {
         console.error('Login error:', error);
-        errorText.textContent = error.message || 'Invalid email or password';
+        const errorMsg = error.message === 'Invalid credentials' 
+            ? 'The email or password you entered is incorrect. Please try again.' 
+            : 'We couldn\'t log you in right now. Please check your connection and try again.';
+        errorText.textContent = errorMsg;
         errorDiv.style.display = 'block';
     } finally {
         Utils.setButtonLoading('submit-btn', false);

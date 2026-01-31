@@ -326,13 +326,15 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 2000;
     overflow-y: auto;
-    padding: var(--spacing-md);
+    padding: 20px;
 }
 
 .modal.active {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .modal-content {
@@ -340,7 +342,11 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     max-width: 100%;
-    margin: auto;
+    width: 100%;
+    max-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
 }
 
 .modal-small {
@@ -357,6 +363,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .modal-header h2 {
@@ -388,6 +395,8 @@
 
 .modal-body {
     padding: var(--spacing-lg);
+    overflow-y: auto;
+    flex: 1;
 }
 
 .modal-footer {
@@ -396,6 +405,7 @@
     display: flex;
     justify-content: flex-end;
     gap: var(--spacing-sm);
+    flex-shrink: 0;
 }
 
 /* Form in Modal */

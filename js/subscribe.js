@@ -83,6 +83,7 @@ async function handleSubscribeSubmit(event) {
         await API.subscribe(email);
 
         // Show success message
+        successDiv.querySelector('p').textContent = 'Thank you for subscribing! Check your email for a warm welcome message from us. 🙏';
         successDiv.style.display = 'flex';
         emailInput.value = '';
 
@@ -91,7 +92,10 @@ async function handleSubscribeSubmit(event) {
 
     } catch (error) {
         console.error('Subscription error:', error);
-        errorText.textContent = error.message || 'Failed to subscribe. Please try again.';
+        const errorMsg = error.message === 'This email is already subscribed' 
+            ? 'This email is already part of our community! You\'ll continue to receive our devotionals.' 
+            : 'We couldn\'t complete your subscription right now. Please try again in a moment.';
+        errorText.textContent = errorMsg;
         errorDiv.style.display = 'block';
     } finally {
         Utils.setButtonLoading('submit-btn', false);

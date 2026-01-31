@@ -116,7 +116,7 @@ async function handleContactSubmit(event) {
         await API.submitContact(formData);
 
         // Show success message
-        successDiv.style.display = 'flex';
+        successDiv.querySelector('p').textContent = "Your message has been sent successfully! We'll get back to you soon. May God bless you!";
         form.reset();
 
         // Scroll to success message
@@ -124,8 +124,7 @@ async function handleContactSubmit(event) {
 
     } catch (error) {
         console.error('Contact form error:', error);
-        errorText.textContent = error.message || 'Failed to send message. Please try again.';
-        errorDiv.style.display = 'block';
+        errorText.textContent = "We couldn't send your message at this time. Please try again or email us directly.";
     } finally {
         Utils.setButtonLoading('submit-btn', false);
     }
