@@ -459,6 +459,10 @@ a:hover {
         font-size: 14px;
     }
 
+    .logo a {
+        font-size: 1.1rem;
+    }
+
     .mobile-menu-toggle {
         display: flex;
     }

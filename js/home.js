@@ -1,11 +1,37 @@
 /**
  * Home page functionality
- * Handles featured posts display
+ * Handles featured posts display and hero background slideshow
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
+    initHeroSlideshow();
     await loadFeaturedPosts();
 });
+
+/**
+ * Initialize hero background slideshow
+ */
+function initHeroSlideshow() {
+    const backgrounds = document.querySelectorAll('.hero-bg');
+    if (backgrounds.length === 0) return;
+
+    let currentIndex = 0;
+    
+    // Show first image
+    backgrounds[currentIndex].classList.add('active');
+
+    // Change background every 6 seconds
+    setInterval(() => {
+        // Remove active class from current
+        backgrounds[currentIndex].classList.remove('active');
+        
+        // Move to next image
+        currentIndex = (currentIndex + 1) % backgrounds.length;
+        
+        // Add active class to next
+        backgrounds[currentIndex].classList.add('active');
+    }, 6000);
+}
 
 /**
  * Load and display featured posts
