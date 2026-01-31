@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Help Guide - GetWordWisdom</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/admin.css">
+    <link rel="stylesheet" href="../styles/help.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2>GetWordWisdom</h2>
+                <p>Admin Dashboard</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    Posts
+                </a>
+                <a href="index.html#subscribers" class="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/>
+                    </svg>
+                    Subscribers
+                </a>
+                <a href="help.html" class="nav-link active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    Help Guide
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn-logout">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main help-main">
+            <header class="help-header">
+                <h1>Admin Help Guide</h1>
+                <div class="admin-user">
+                    <span id="admin-email">admin@getwordwisdom.com</span>
+                </div>
+            </header>
+
+            <!-- Quick Navigation -->
+            <div class="help-nav">
+                <a href="#getting-started" class="help-nav-link">Getting Started</a>
+                <a href="#posts" class="help-nav-link">Managing Posts</a>
+                <a href="#subscribers" class="help-nav-link">Subscribers</a>
+                <a href="#images" class="help-nav-link">Images</a>
+                <a href="#best-practices" class="help-nav-link">Best Practices</a>
+            </div>
+
+            <!-- Help Content -->
+            <div class="help-content">
+                
+                <!-- Getting Started -->
+                <section id="getting-started" class="help-section">
+                    <div class="section-icon">🚀</div>
+                    <h2>Getting Started</h2>
+                    
+                    <div class="help-card">
+                        <h3>Welcome to GetWordWisdom Admin Dashboard!</h3>
+                        <p>Your central hub for managing blog posts and subscribers. This guide will help you navigate and use all the features effectively.</p>
+                    </div>
+
+                    <div class="help-card">
+                        <h3>Dashboard Overview</h3>
+                        <p>The dashboard has two main sections accessible from the sidebar:</p>
+                        <ul class="help-list">
+                            <li><strong>Posts</strong> - Create, edit, and manage your blog content</li>
+                            <li><strong>Subscribers</strong> - View and manage your newsletter subscribers</li>
+                        </ul>
+                    </div>
+
+                    <div class="help-card alert-warning">
+                        <h4>🔒 Security First</h4>
+                        <p>Change your default password immediately after first login to keep your dashboard secure.</p>
+                    </div>
+                </section>
+
+                <!-- Managing Posts -->
+                <section id="posts" class="help-section">
+                    <div class="section-icon">📝</div>
+                    <h2>Managing Posts</h2>
+
+                    <!-- Creating Posts -->
+                    <div class="help-card">
+                        <h3>Creating a New Post</h3>
+                        <ol class="help-steps">
+                            <li>
+                                <strong>Click "Create New Post"</strong>
+                                <p>Located at the top of the Posts section. This opens the post editor.</p>
+                            </li>
+                            <li>
+                                <strong>Enter Post Title</strong>
+                                <p>Write a clear, compelling headline that captures your content.</p>
+                                <div class="example-box">
+                                    Example: "Finding Peace in God's Promises"
+                                </div>
+                            </li>
+                            <li>
+                                <strong>Check the Slug</strong>
+                                <p>Auto-generated URL-friendly version of your title. You can edit it if needed.</p>
+                                <div class="example-box">
+                                    Example: finding-peace-in-gods-promises
+                                </div>
+                            </li>
+                            <li>
+                                <strong>Select Category</strong>
+                                <p>Choose the most appropriate category:</p>
+                                <ul>
+                                    <li><span class="badge badge-faith">Faith</span> - Faith-building content</li>
+                                    <li><span class="badge badge-devotionals">Devotionals</span> - Daily spiritual nourishment</li>
+                                    <li><span class="badge badge-living">Christian Living</span> - Practical life guidance</li>
+                                    <li><span class="badge badge-teachings">Teachings</span> - Biblical teachings</li>
+                                    <li><span class="badge badge-wisdom">Wisdom</span> - Life wisdom and insights</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Enter Author Name</strong>
+                                <p>Your name or the content creator's name (auto-filled but editable).</p>
+                            </li>
+                            <li>
+                                <strong>Upload Featured Image (Optional)</strong>
+                                <p>Click "Choose File" to upload an image that represents your post.</p>
+                            </li>
+                            <li>
+                                <strong>Write Your Content</strong>
+                                <p>Enter your blog post in the large text area. You can use HTML for formatting.</p>
+                            </li>
+                            <li>
+                                <strong>Set Status</strong>
+                                <ul>
+                                    <li><strong>Draft</strong> - Save without publishing (not visible to readers)</li>
+                                    <li><strong>Published</strong> - Make live on your website immediately</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Mark as Featured (Optional)</strong>
+                                <p>Check this box to display the post prominently on your homepage.</p>
+                            </li>
+                            <li>
+                                <strong>Save Your Post</strong>
+                                <p>Click "Save Post" and wait for the success message.</p>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <!-- Content Formatting -->
+                    <div class="help-card">
+                        <h3>Formatting Your Content</h3>
+                        <p>Use these HTML tags to format your content beautifully:</p>
+                        
+                        <div class="format-grid">
+                            <div class="format-item">
+                                <code>&lt;p&gt;Your text&lt;/p&gt;</code>
+                                <p>Paragraphs</p>
+                            </div>
+                            <div class="format-item">
+                                <code>&lt;strong&gt;Text&lt;/strong&gt;</code>
+                                <p>Bold text</p>
+                            </div>
+                            <div class="format-item">
+                                <code>&lt;em&gt;Text&lt;/em&gt;</code>
+                                <p>Italic text</p>
+                            </div>
+                            <div class="format-item">
+                                <code>&lt;br&gt;</code>
+                                <p>Line break</p>
+                            </div>
+                        </div>
+
+                        <div class="example-box">
+                            <strong>Example:</strong>
+                            <pre>&lt;p&gt;In times of trouble, we find comfort in God's word.&lt;/p&gt;
+
+&lt;blockquote&gt;"The Lord is my shepherd, I shall not want." - Psalm 23:1&lt;/blockquote&gt;
+
+&lt;p&gt;This verse reminds us that:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;God provides for our needs&lt;/li&gt;
+  &lt;li&gt;We lack nothing in His care&lt;/li&gt;
+  &lt;li&gt;He guides us through every season&lt;/li&gt;
+&lt;/ul&gt;</pre>
+                        </div>
+                    </div>
+
+                    <!-- Editing Posts -->
+                    <div class="help-card">
+                        <h3>Editing an Existing Post</h3>
+                        <ol class="help-steps">
+                            <li>Find your post in the Posts table</li>
+                            <li>Click the <strong>Edit icon</strong> (pencil) in the Actions column</li>
+                            <li>Update any fields you need to change</li>
+                            <li>Click "Save Post" to apply changes</li>
+                        </ol>
+                        <p class="tip-box">💡 <strong>Tip:</strong> Use Draft status while working on updates, then switch to Published when ready.</p>
+                    </div>
+
+                    <!-- Deleting Posts -->
+                    <div class="help-card alert-danger">
+                        <h3>Deleting a Post</h3>
+                        <p><strong>⚠️ Warning:</strong> Deletion is permanent and cannot be undone!</p>
+                        <ol class="help-steps">
+                            <li>Click the <strong>Delete icon</strong> (trash) next to the post</li>
+                            <li>Review the post title in the confirmation dialog</li>
+                            <li>Click "Delete" to confirm, or "Cancel" to keep the post</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- Subscribers -->
+                <section id="subscribers" class="help-section">
+                    <div class="section-icon">👥</div>
+                    <h2>Managing Subscribers</h2>
+
+                    <div class="help-card">
+                        <h3>Understanding Your Subscribers</h3>
+                        <p>The Subscribers section shows everyone who has signed up for your newsletter.</p>
+                        
+                        <div class="stats-example">
+                            <div class="stat-demo">
+                                <h4>Total Subscribers</h4>
+                                <p>All people who have ever subscribed</p>
+                            </div>
+                            <div class="stat-demo">
+                                <h4>Active Subscribers</h4>
+                                <p>Currently subscribed (will receive emails)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="help-card">
+                        <h3>Automatic Email Notifications</h3>
+                        <p>Your subscribers receive emails automatically in two situations:</p>
+                        
+                        <div class="notification-grid">
+                            <div class="notification-card">
+                                <div class="notif-icon">✉️</div>
+                                <h4>Welcome Email</h4>
+                                <p>Sent immediately when someone subscribes</p>
+                                <ul>
+                                    <li>Warm welcome message</li>
+                                    <li>Platform introduction</li>
+                                    <li>Scripture encouragement</li>
+                                </ul>
+                            </div>
+                            <div class="notification-card">
+                                <div class="notif-icon">📬</div>
+                                <h4>New Post Newsletter</h4>
+                                <p>Sent when you publish a new post</p>
+                                <ul>
+                                    <li>Post title and category</li>
+                                    <li>Content preview</li>
+                                    <li>Link to read full post</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="help-card">
+                        <h3>Viewing Subscriber Information</h3>
+                        <p>The subscriber table displays:</p>
+                        <ul class="help-list">
+                            <li><strong>Email</strong> - Subscriber's email address</li>
+                            <li><strong>Status</strong> - Active (receiving emails) or Unsubscribed</li>
+                            <li><strong>Date Subscribed</strong> - When they joined</li>
+                            <li><strong>Actions</strong> - Delete option</li>
+                        </ul>
+                    </div>
+
+                    <div class="help-card alert-warning">
+                        <h4>Removing Subscribers</h4>
+                        <p>Only delete subscribers if:</p>
+                        <ul>
+                            <li>They requested removal</li>
+                            <li>Email address is invalid or bouncing</li>
+                            <li>It's a duplicate entry</li>
+                        </ul>
+                        <p class="tip-box">💡 <strong>Tip:</strong> Let subscribers use the unsubscribe link in emails rather than deleting them manually.</p>
+                    </div>
+                </section>
+
+                <!-- Images -->
+                <section id="images" class="help-section">
+                    <div class="section-icon">🖼️</div>
+                    <h2>Working with Images</h2>
+
+                    <div class="help-card">
+                        <h3>Uploading Featured Images</h3>
+                        <p>Featured images make your posts more appealing and engaging.</p>
+                        
+                        <ol class="help-steps">
+                            <li>
+                                <strong>Click "Choose File"</strong>
+                                <p>In the Featured Image section of the post editor</p>
+                            </li>
+                            <li>
+                                <strong>Select Your Image</strong>
+                                <p>Choose a relevant image from your computer</p>
+                            </li>
+                            <li>
+                                <strong>Wait for Upload</strong>
+                                <p>A progress bar shows the upload status</p>
+                            </li>
+                            <li>
+                                <strong>Preview Displays</strong>
+                                <p>You'll see a preview once upload is complete</p>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="help-card">
+                        <h3>Image Best Practices</h3>
+                        <div class="best-practice-grid">
+                            <div class="practice-card">
+                                <div class="practice-icon">✅</div>
+                                <h4>Do This</h4>
+                                <ul>
+                                    <li>Use high-quality images</li>
+                                    <li>Minimum 1200px wide</li>
+                                    <li>JPG or PNG format</li>
+                                    <li>Relevant to content</li>
+                                    <li>Landscape orientation (16:9)</li>
+                                </ul>
+                            </div>
+                            <div class="practice-card">
+                                <div class="practice-icon">❌</div>
+                                <h4>Avoid This</h4>
+                                <ul>
+                                    <li>Blurry or pixelated images</li>
+                                    <li>Very large file sizes (&gt;2MB)</li>
+                                    <li>Copyrighted images</li>
+                                    <li>Unrelated stock photos</li>
+                                    <li>Portrait orientation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="help-card">
+                        <h3>Free Image Resources</h3>
+                        <p>Use these websites for free, high-quality Christian-themed images:</p>
+                        <ul class="resource-list">
+                            <li><strong>Unsplash</strong> - unsplash.com</li>
+                            <li><strong>Pexels</strong> - pexels.com</li>
+                            <li><strong>Pixabay</strong> - pixabay.com</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Best Practices -->
+                <section id="best-practices" class="help-section">
+                    <div class="section-icon">⭐</div>
+                    <h2>Best Practices</h2>
+
+                    <div class="help-card">
+                        <h3>Content Creation Tips</h3>
+                        
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <h4>📅 Posting Schedule</h4>
+                                <p>Maintain consistency with regular posting:</p>
+                                <ul>
+                                    <li>Choose specific days (e.g., Mon, Wed, Fri)</li>
+                                    <li>Same time each day</li>
+                                    <li>Plan content 1-2 weeks ahead</li>
+                                </ul>
+                            </div>
+
+                            <div class="tip-card">
+                                <h4>✍️ Writing Quality</h4>
+                                <p>Create engaging, valuable content:</p>
+                                <ul>
+                                    <li>Clear, focused message</li>
+                                    <li>Scripture-based insights</li>
+                                    <li>Practical application</li>
+                                    <li>Proofread before publishing</li>
+                                </ul>
+                            </div>
+
+                            <div class="tip-card">
+                                <h4>🎯 Featured Posts</h4>
+                                <p>Use featured status strategically:</p>
+                                <ul>
+                                    <li>Limit to 3-5 posts</li>
+                                    <li>Highlight best content</li>
+                                    <li>Update regularly</li>
+                                    <li>Match current themes/seasons</li>
+                                </ul>
+                            </div>
+
+                            <div class="tip-card">
+                                <h4>📂 Categories</h4>
+                                <p>Organize content effectively:</p>
+                                <ul>
+                                    <li>Use categories consistently</li>
+                                    <li>Balance across categories</li>
+                                    <li>Help readers find content</li>
+                                    <li>Create themed series</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="help-card">
+                        <h3>Workflow Recommendations</h3>
+                        
+                        <div class="workflow-box">
+                            <h4>1. Draft → Review → Publish</h4>
+                            <p>Always save as Draft first, review carefully, then publish when ready.</p>
+                        </div>
+
+                        <div class="workflow-box">
+                            <h4>2. Add Images to Every Post</h4>
+                            <p>Posts with images get more engagement and look more professional.</p>
+                        </div>
+
+                        <div class="workflow-box">
+                            <h4>3. Preview Before Publishing</h4>
+                            <p>Check how your post looks on the live site before making it public.</p>
+                        </div>
+
+                        <div class="workflow-box">
+                            <h4>4. Monitor Subscriber Growth</h4>
+                            <p>Check your subscriber count regularly and celebrate milestones.</p>
+                        </div>
+                    </div>
+
+                    <div class="help-card">
+                        <h3>Content Ideas</h3>
+                        <p>Need inspiration? Try these content types:</p>
+                        
+                        <div class="ideas-grid">
+                            <div class="idea-card">
+                                <span class="idea-icon">📖</span>
+                                <h4>Scripture Study</h4>
+                                <p>Deep dive into specific verses or passages</p>
+                            </div>
+                            <div class="idea-card">
+                                <span class="idea-icon">🙏</span>
+                                <h4>Prayer Guides</h4>
+                                <p>Teach effective prayer practices</p>
+                            </div>
+                            <div class="idea-card">
+                                <span class="idea-icon">💭</span>
+                                <h4>Daily Devotionals</h4>
+                                <p>Short, inspiring daily messages</p>
+                            </div>
+                            <div class="idea-card">
+                                <span class="idea-icon">❤️</span>
+                                <h4>Testimonies</h4>
+                                <p>Share faith stories and experiences</p>
+                            </div>
+                            <div class="idea-card">
+                                <span class="idea-icon">🌟</span>
+                                <h4>Life Lessons</h4>
+                                <p>Practical wisdom for daily living</p>
+                            </div>
+                            <div class="idea-card">
+                                <span class="idea-icon">📚</span>
+                                <h4>Bible Teaching</h4>
+                                <p>Explain biblical concepts clearly</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Reference -->
+                <section id="quick-reference" class="help-section">
+                    <div class="section-icon">📌</div>
+                    <h2>Quick Reference</h2>
+
+                    <div class="reference-grid">
+                        <div class="reference-card">
+                            <h4>Post Statuses</h4>
+                            <ul>
+                                <li><span class="status-badge draft">Draft</span> Not visible to public</li>
+                                <li><span class="status-badge published">Published</span> Live on website</li>
+                            </ul>
+                        </div>
+
+                        <div class="reference-card">
+                            <h4>Categories</h4>
+                            <ul>
+                                <li>Faith</li>
+                                <li>Devotionals</li>
+                                <li>Christian Living</li>
+                                <li>Teachings</li>
+                                <li>Wisdom</li>
+                            </ul>
+                        </div>
+
+                        <div class="reference-card">
+                            <h4>Image Guidelines</h4>
+                            <ul>
+                                <li>Size: 1200x600px</li>
+                                <li>Format: JPG or PNG</li>
+                                <li>Max: 2MB</li>
+                            </ul>
+                        </div>
+
+                        <div class="reference-card">
+                            <h4>Email Triggers</h4>
+                            <ul>
+                                <li>New subscription → Welcome email</li>
+                                <li>Published post → Newsletter</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Back to Top Button -->
+            <button id="back-to-top" class="back-to-top" style="display: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 15l-6-6-6 6"/>
+                </svg>
+            </button>
+        </main>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/utils.js"></script>
+    <script>
+        // Check authentication
+        const adminEmail = Utils.getSessionData('adminEmail');
+        if (!adminEmail) {
+            window.location.href = 'login.html';
+        }
+
+        // Display admin email
+        document.getElementById('admin-email').textContent = adminEmail;
+
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            Utils.clearSession();
+            window.location.href = 'login.html';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.help-nav-link, a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top');
+        const helpMain = document.querySelector('.help-main');
+        
+        helpMain.addEventListener('scroll', () => {
+            if (helpMain.scrollTop > 300) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            helpMain.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Highlight active section in navigation
+        const sections = document.querySelectorAll('.help-section');
+        const navLinks = document.querySelectorAll('.help-nav-link');
+
+        helpMain.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (helpMain.scrollTop >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

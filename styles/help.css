@@ -1,0 +1,761 @@
+/* ===================================
+   Help Page Styles
+   =================================== */
+
+.help-main {
+    overflow-y: auto;
+    height: 100vh;
+}
+
+/* Help Header */
+.help-header {
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border-bottom: 2px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.help-header h1 {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Help Navigation */
+.help-nav {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1e4db7 100%);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    margin: 0;
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+}
+
+.help-nav-link {
+    color: var(--background-white);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.help-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.help-nav-link.active {
+    background-color: var(--background-white);
+    color: var(--primary-color);
+}
+
+/* Help Content */
+.help-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+}
+
+/* Help Sections */
+.help-section {
+    margin-bottom: var(--spacing-xxl);
+    scroll-margin-top: 100px;
+}
+
+.section-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.help-section h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+/* Help Cards */
+.help-card {
+    background-color: var(--background-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-fast);
+}
+
+.help-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+    border-color: var(--primary-color);
+}
+
+.help-card h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.help-card h4 {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.help-card p {
+    color: var(--text-medium);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Alert Variants */
+.alert-warning {
+    background: linear-gradient(135deg, #fff9f0 0%, #fff3e0 100%);
+    border: 2px solid #ff9800;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffebee 100%);
+    border: 2px solid var(--error-color);
+}
+
+/* Lists */
+.help-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.help-list li {
+    padding: var(--spacing-sm) 0;
+    padding-left: var(--spacing-lg);
+    position: relative;
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+.help-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Ordered Steps */
+.help-steps {
+    counter-reset: step-counter;
+    list-style: none;
+    padding-left: 0;
+}
+
+.help-steps li {
+    counter-increment: step-counter;
+    padding: var(--spacing-md) 0 var(--spacing-md) 60px;
+    position: relative;
+    margin-bottom: var(--spacing-md);
+}
+
+.help-steps li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: var(--spacing-md);
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--background-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.help-steps li strong {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: var(--spacing-xs);
+}
+
+.help-steps li p {
+    margin-bottom: var(--spacing-xs);
+}
+
+.help-steps li ul {
+    margin-top: var(--spacing-sm);
+    padding-left: var(--spacing-lg);
+}
+
+/* Example Boxes */
+.example-box {
+    background-color: var(--background-light);
+    border: 2px solid var(--secondary-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    font-family: var(--font-mono, 'Courier New', monospace);
+    font-size: 0.9rem;
+}
+
+.example-box pre {
+    margin: 0;
+    white-space: pre-wrap;
+    color: var(--text-dark);
+}
+
+/* Tip Box */
+.tip-box {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border: 2px solid #2196f3;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    color: #1565c0;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-right: var(--spacing-xs);
+}
+
+.badge-faith { background-color: #e3f2fd; color: #1565c0; }
+.badge-devotionals { background-color: #f3e5f5; color: #6a1b9a; }
+.badge-living { background-color: #e8f5e9; color: #2e7d32; }
+.badge-teachings { background-color: #fff3e0; color: #e65100; }
+.badge-wisdom { background-color: #fce4ec; color: #c2185b; }
+
+/* Format Grid */
+.format-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+}
+
+.format-item {
+    background-color: var(--background-light);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.format-item code {
+    display: block;
+    background-color: var(--background-white);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.85rem;
+    color: var(--primary-color);
+}
+
+/* Stats Example */
+.stats-example {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.stat-demo {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--background-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.stat-demo h4 {
+    color: var(--background-white);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.stat-demo p {
+    color: var(--background-white);
+    margin: 0;
+    opacity: 0.95;
+}
+
+/* Notification Grid */
+.notification-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.notification-card {
+    background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+    border: 2px solid var(--primary-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    text-align: center;
+}
+
+.notif-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.notification-card h4 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.notification-card ul {
+    text-align: left;
+    padding-left: var(--spacing-lg);
+}
+
+/* Best Practice Grid */
+.best-practice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.practice-card {
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.practice-icon {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.practice-card h4 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.practice-card ul {
+    padding-left: var(--spacing-lg);
+}
+
+.practice-card ul li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Resource List */
+.resource-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.resource-list li {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--background-light);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Tips Grid */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.tip-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border: 2px solid var(--secondary-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.tip-card h4 {
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.tip-card ul {
+    padding-left: var(--spacing-lg);
+    margin: 0;
+}
+
+/* Workflow Boxes */
+.workflow-box {
+    background-color: var(--background-light);
+    border: 2px solid var(--secondary-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.workflow-box h4 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Ideas Grid */
+.ideas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+}
+
+.idea-card {
+    background: linear-gradient(135deg, var(--background-white), var(--background-light));
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    text-align: center;
+    transition: all var(--transition-fast);
+}
+
+.idea-card:hover {
+    border-color: var(--secondary-color);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.idea-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+}
+
+.idea-card h4 {
+    color: var(--primary-color);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.idea-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Quick Reference */
+.reference-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.reference-card {
+    background-color: var(--background-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.reference-card h4 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.reference-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.reference-card ul li {
+    padding: var(--spacing-xs) 0;
+    color: var(--text-medium);
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-right: var(--spacing-sm);
+}
+
+.status-badge.draft {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.status-badge.published {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--background-white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-fast);
+    z-index: 1000;
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(41, 98, 255, 0.4);
+}
+
+.back-to-top svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .help-header {
+        padding: var(--spacing-md);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .help-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .help-nav {
+        padding: var(--spacing-md);
+        gap: var(--spacing-sm);
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: thin;
+    }
+
+    .help-nav::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .help-nav::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 2px;
+    }
+
+    .help-nav-link {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .help-content {
+        padding: var(--spacing-md);
+    }
+
+    .help-section {
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .help-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .section-icon {
+        font-size: 2rem;
+    }
+
+    .help-card {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .help-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .help-card h4 {
+        font-size: 1rem;
+    }
+
+    .help-steps li {
+        padding-left: 55px;
+        padding-top: var(--spacing-sm);
+        padding-bottom: var(--spacing-sm);
+    }
+
+    .help-steps li::before {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .format-grid,
+    .notification-grid,
+    .best-practice-grid,
+    .tips-grid,
+    .ideas-grid,
+    .reference-grid,
+    .stats-example {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+    }
+
+    /* Better touch targets */
+    .help-nav-link,
+    button,
+    a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .help-header h1 {
+        font-size: 1.25rem;
+    }
+
+    .help-nav {
+        padding: var(--spacing-sm);
+    }
+
+    .help-nav-link {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.8rem;
+    }
+
+    .help-content {
+        padding: var(--spacing-sm);
+    }
+
+    .help-section {
+        scroll-margin-top: 80px;
+    }
+
+    .help-section h2 {
+        font-size: 1.25rem;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .section-icon {
+        font-size: 1.75rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .help-card {
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-md);
+    }
+
+    .help-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .help-card h4 {
+        font-size: 0.95rem;
+    }
+
+    .help-steps li {
+        padding-left: 45px;
+        font-size: 0.9rem;
+    }
+
+    .help-steps li::before {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+
+    .help-steps li strong {
+        font-size: 1rem;
+    }
+
+    .format-item,
+    .notification-card,
+    .practice-card,
+    .tip-card,
+    .idea-card,
+    .reference-card {
+        padding: var(--spacing-sm);
+    }
+
+    .example-box {
+        padding: var(--spacing-sm);
+        font-size: 0.85rem;
+        overflow-x: auto;
+    }
+
+    .tip-box {
+        padding: var(--spacing-sm);
+        font-size: 0.9rem;
+    }
+
+    .workflow-box {
+        padding: var(--spacing-sm);
+    }
+
+    .back-to-top {
+        bottom: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .back-to-top svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Improve table readability on mobile */
+    table {
+        font-size: 0.85rem;
+    }
+
+    /* Better spacing for lists */
+    .help-list li,
+    ul li,
+    ol li {
+        padding: var(--spacing-xs) 0;
+        line-height: 1.7;
+    }
+
+    /* Optimize touch interactions */
+    .help-nav-link,
+    button,
+    a {
+        min-height: 44px;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+}

@@ -50,13 +50,15 @@ async function initializeAdmin() {
  * Initialize sidebar navigation
  */
 function initializeSidebarNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.nav-link[data-section]');
     
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const section = link.getAttribute('data-section');
-            switchSection(section);
+            if (section) {
+                switchSection(section);
+            }
         });
     });
 }
@@ -66,10 +68,12 @@ function initializeSidebarNavigation() {
  * @param {string} section - Section name
  */
 async function switchSection(section) {
+    if (!section) return;
+    
     currentSection = section;
 
     // Update navigation
-    document.querySelectorAll('.nav-link').forEach(link => {
+    document.querySelectorAll('.nav-link[data-section]').forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('data-section') === section) {
             link.classList.add('active');
@@ -80,14 +84,21 @@ async function switchSection(section) {
     document.querySelectorAll('.admin-section').forEach(sec => {
         sec.classList.remove('active');
     });
-    document.getElementById(`${section}-section`).classList.add('active');
+    
+    const sectionElement = document.getElementById(`${section}-section`);
+    if (sectionElement) {
+        sectionElement.classList.add('active');
+    }
 
     // Update page title
     const titles = {
         'posts': 'Posts Management',
         'subscribers': 'Subscribers Management'
     };
-    document.getElementById('page-title').textContent = titles[section] || section;
+    const pageTitleElement = document.getElementById('page-title');
+    if (pageTitleElement) {
+        pageTitleElement.textContent = titles[section] || section;
+    }
 
     // Load section data
     if (section === 'posts') {
