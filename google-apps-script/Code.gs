@@ -341,7 +341,12 @@ function handleGetFeaturedPosts(data) {
     status: row[7],
     isFeatured: row[8],
     createdDate: row[9]
-  })).filter(post => post.status === 'published' && post.isFeatured === 'TRUE');
+  })).filter(post => {
+    // Check if post is published and featured
+    // Handle both boolean and string values
+    const isFeatured = String(post.isFeatured).toUpperCase() === 'TRUE';
+    return post.status === 'published' && isFeatured;
+  });
   
   // Sort by date (newest first)
   posts.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
