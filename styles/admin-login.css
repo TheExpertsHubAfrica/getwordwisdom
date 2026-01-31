@@ -1,0 +1,79 @@
+/* ===================================
+   Admin Login Page Styles
+   =================================== */
+
+.admin-body {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+}
+
+.login-container {
+    width: 100%;
+    max-width: 450px;
+}
+
+.login-box {
+    background-color: var(--background-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.login-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--background-white);
+    padding: var(--spacing-xl);
+    text-align: center;
+}
+
+.login-header h1 {
+    color: var(--background-white);
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.login-header h2 {
+    color: var(--background-white);
+    font-size: 1.2rem;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+.login-form {
+    padding: var(--spacing-xl);
+}
+
+.login-footer {
+    padding: var(--spacing-md);
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.login-footer a {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    transition: color var(--transition-fast);
+}
+
+.login-footer a:hover {
+    color: var(--secondary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .login-box {
+        border-radius: var(--radius-md);
+    }
+
+    .login-header {
+        padding: var(--spacing-lg);
+    }
+
+    .login-form {
+        padding: var(--spacing-md);
+    }
+}

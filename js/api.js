@@ -1,0 +1,194 @@
+/**
+ * API module for GetWordWisdom
+ * Handles all communication with Google Apps Script backend
+ */
+
+const API = {
+    /**
+     * Make a request to the Google Apps Script backend
+     * @param {string} endpoint - The endpoint to call
+     * @param {object} data - The data to send
+     * @param {string} method - HTTP method (GET or POST)
+     * @returns {Promise<object>} - The response data
+     */
+    async request(endpoint, data = {}, method = 'POST') {
+        try {
+            const url = method === 'GET' && Object.keys(data).length > 0
+                ? `${CONFIG.API_URL}?${new URLSearchParams(data)}`
+                : CONFIG.API_URL;
+
+            const options = {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            };
+
+            if (method === 'POST') {
+                options.body = JSON.stringify({
+                    action: endpoint,
+                    ...data
+                });
+            }
+
+            const response = await fetch(url, options);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            
+            if (result.error) {
+                throw new Error(result.error);
+            }
+
+            return result;
+        } catch (error) {
+            console.error('API Request Error:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Get all published posts
+     * @param {number} page - Page number
+     * @param {string} category - Category filter (optional)
+     * @returns {Promise<object>} - Posts and pagination data
+     */
+    async getPosts(page = 1, category = '') {
+        return this.request('getPosts', { page, category, perPage: CONFIG.POSTS_PER_PAGE });
+    },
+
+    /**
+     * Get featured posts
+     * @returns {Promise<array>} - Array of featured posts
+     */
+    async getFeaturedPosts() {
+        return this.request('getFeaturedPosts', { limit: CONFIG.FEATURED_POSTS_LIMIT });
+    },
+
+    /**
+     * Get a single post by slug
+     * @param {string} slug - Post slug
+     * @returns {Promise<object>} - Post data
+     */
+    async getPostBySlug(slug) {
+        return this.request('getPostBySlug', { slug });
+    },
+
+    /**
+     * Get posts by category
+     * @param {string} category - Category name
+     * @param {number} page - Page number
+     * @returns {Promise<object>} - Posts and pagination data
+     */
+    async getPostsByCategory(category, page = 1) {
+        return this.request('getPostsByCategory', { category, page, perPage: CONFIG.POSTS_PER_PAGE });
+    },
+
+    /**
+     * Get post count by category
+     * @returns {Promise<object>} - Category counts
+     */
+    async getCategoryCounts() {
+        return this.request('getCategoryCounts');
+    },
+
+    /**
+     * Subscribe to newsletter
+     * @param {string} email - Subscriber email
+     * @returns {Promise<object>} - Success message
+     */
+    async subscribe(email) {
+        return this.request('subscribe', { email });
+    },
+
+    /**
+     * Submit contact form
+     * @param {object} formData - Form data {name, email, subject, message}
+     * @returns {Promise<object>} - Success message
+     */
+    async submitContact(formData) {
+        return this.request('submitContact', formData);
+    },
+
+    /**
+     * Admin login
+     * @param {string} email - Admin email
+     * @param {string} password - Admin password
+     * @returns {Promise<object>} - Auth token and user data
+     */
+    async adminLogin(email, password) {
+        return this.request('adminLogin', { email, password });
+    },
+
+    /**
+     * Verify admin session
+     * @param {string} token - Auth token
+     * @returns {Promise<object>} - User data
+     */
+    async verifyAdminSession(token) {
+        return this.request('verifyAdminSession', { token });
+    },
+
+    /**
+     * Get all posts (admin)
+     * @param {string} token - Auth token
+     * @returns {Promise<array>} - All posts
+     */
+    async adminGetAllPosts(token) {
+        return this.request('adminGetAllPosts', { token });
+    },
+
+    /**
+     * Create or update a post (admin)
+     * @param {string} token - Auth token
+     * @param {object} postData - Post data
+     * @returns {Promise<object>} - Success message
+     */
+    async adminSavePost(token, postData) {
+        return this.request('adminSavePost', { token, postData });
+    },
+
+    /**
+     * Delete a post (admin)
+     * @param {string} token - Auth token
+     * @param {string} postId - Post ID
+     * @returns {Promise<object>} - Success message
+     */
+    async adminDeletePost(token, postId) {
+        return this.request('adminDeletePost', { token, postId });
+    },
+
+    /**
+     * Upload image to Google Drive (admin)
+     * @param {string} token - Auth token
+     * @param {string} base64Data - Base64 encoded image
+     * @param {string} filename - File name
+     * @returns {Promise<object>} - Image URL
+     */
+    async adminUploadImage(token, base64Data, filename) {
+        return this.request('adminUploadImage', { token, base64Data, filename });
+    },
+
+    /**
+     * Get all subscribers (admin)
+     * @param {string} token - Auth token
+     * @returns {Promise<array>} - All subscribers
+     */
+    async adminGetSubscribers(token) {
+        return this.request('adminGetSubscribers', { token });
+    },
+
+    /**
+     * Toggle subscriber status (admin)
+     * @param {string} token - Auth token
+     * @param {string} subscriberId - Subscriber ID
+     * @param {string} status - New status (active/inactive)
+     * @returns {Promise<object>} - Success message
+     */
+    async adminToggleSubscriber(token, subscriberId, status) {
+        return this.request('adminToggleSubscriber', { token, subscriberId, status });
+    }
+};

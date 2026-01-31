@@ -1,0 +1,238 @@
+/* ===================================
+   Single Post Page Styles
+   =================================== */
+
+.post-article {
+    min-height: 60vh;
+}
+
+.loading-container {
+    padding: var(--spacing-xxl) 0;
+}
+
+.skeleton-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+/* Post Header */
+.post-header {
+    background-color: var(--background-light);
+    padding: var(--spacing-xl) 0;
+    text-align: center;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.post-category {
+    background-color: var(--secondary-color);
+    color: var(--background-white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.post-date {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+#post-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-color);
+}
+
+.post-author {
+    color: var(--text-medium);
+    font-size: 1.05rem;
+    font-style: italic;
+}
+
+/* Featured Image */
+.post-featured-image {
+    width: 100%;
+    max-height: 500px;
+    overflow: hidden;
+    margin-bottom: var(--spacing-xl);
+}
+
+.post-featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Post Body */
+.post-body {
+    padding: var(--spacing-xl) 0;
+}
+
+.post-body .container {
+    max-width: 800px;
+}
+
+#post-body-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+}
+
+#post-body-content p {
+    margin-bottom: var(--spacing-md);
+}
+
+#post-body-content h2,
+#post-body-content h3,
+#post-body-content h4 {
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-color);
+}
+
+#post-body-content blockquote {
+    background-color: var(--background-light);
+    border-left: 4px solid var(--secondary-color);
+    padding: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+    font-family: var(--font-primary);
+    font-style: italic;
+}
+
+#post-body-content ul,
+#post-body-content ol {
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+#post-body-content li {
+    margin-bottom: var(--spacing-xs);
+}
+
+#post-body-content a {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+#post-body-content a:hover {
+    color: var(--primary-color);
+}
+
+#post-body-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    margin: var(--spacing-md) 0;
+}
+
+/* Post Footer */
+.post-footer {
+    margin-top: var(--spacing-xxl);
+    padding-top: var(--spacing-xl);
+    border-top: 2px solid var(--border-color);
+}
+
+.share-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.share-section h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-color);
+}
+
+.share-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.share-btn.twitter {
+    background-color: #1DA1F2;
+    color: white;
+}
+
+.share-btn.facebook {
+    background-color: #1877F2;
+    color: white;
+}
+
+.share-btn.linkedin {
+    background-color: #0A66C2;
+    color: white;
+}
+
+.share-btn.copy {
+    background-color: var(--text-medium);
+    color: white;
+}
+
+.share-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Newsletter CTA Small */
+.newsletter-cta-small {
+    background-color: var(--background-light);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.newsletter-cta-small h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.newsletter-cta-small p {
+    color: var(--text-medium);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #post-title {
+        font-size: 2rem;
+    }
+
+    .post-meta {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    #post-body-content {
+        font-size: 1rem;
+    }
+
+    .share-buttons {
+        flex-direction: column;
+    }
+
+    .share-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

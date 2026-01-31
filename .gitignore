@@ -1,0 +1,59 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Node modules (if using npm for tooling)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build directories
+dist/
+build/
+
+# Environment and Configuration
+.env
+.env.local
+.env.*.local
+config.local.js
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Coverage and Testing
+coverage/
+.nyc_output/
+
+# Backup files
+*.backup
+*.bak
+*.old
+
+# Google Apps Script (if using clasp)
+.clasp.json
+
+# Deployment files (might contain sensitive info)
+# deployment-config.json

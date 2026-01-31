@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse articles by category - Faith, Devotionals, Christian Living, Teachings, and Wisdom">
+    <title>Categories - GetWordWisdom</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/categories.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="/">GetWordWisdom</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/categories/" class="active">Categories</a></li>
+                <li><a href="/devotionals/">Devotionals</a></li>
+                <li><a href="/subscribe/">Subscribe</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <h1>Browse by Category</h1>
+                <p class="subtitle">Explore content organized by themes that matter to your faith journey</p>
+            </div>
+        </section>
+
+        <section class="categories-content">
+            <div class="container">
+                <div class="categories-grid">
+                    <div class="category-card" data-category="Faith">
+                        <div class="category-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h2>Faith</h2>
+                        <p>Strengthen your faith foundation with biblical truths and spiritual insights</p>
+                        <span class="post-count" data-category="Faith">Loading...</span>
+                    </div>
+
+                    <div class="category-card" data-category="Devotionals">
+                        <div class="category-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                            </svg>
+                        </div>
+                        <h2>Devotionals</h2>
+                        <p>Daily devotionals to inspire and encourage your walk with God</p>
+                        <span class="post-count" data-category="Devotionals">Loading...</span>
+                    </div>
+
+                    <div class="category-card" data-category="Christian Living">
+                        <div class="category-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h2>Christian Living</h2>
+                        <p>Practical guidance for living out your faith in everyday life</p>
+                        <span class="post-count" data-category="Christian Living">Loading...</span>
+                    </div>
+
+                    <div class="category-card" data-category="Teachings">
+                        <div class="category-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4M12 8h.01"/>
+                            </svg>
+                        </div>
+                        <h2>Teachings</h2>
+                        <p>Biblical teachings to deepen your understanding of God's Word</p>
+                        <span class="post-count" data-category="Teachings">Loading...</span>
+                    </div>
+
+                    <div class="category-card" data-category="Wisdom">
+                        <div class="category-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h2>Wisdom</h2>
+                        <p>Timeless wisdom from Scripture applied to modern challenges</p>
+                        <span class="post-count" data-category="Wisdom">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GetWordWisdom</h3>
+                    <p>Sharing faith, wisdom, and devotionals to strengthen your walk with Christ.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/categories/">Categories</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="/subscribe/">Subscribe</a></li>
+                        <li><a href="/devotionals/">Devotionals</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> GetWordWisdom. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/categories.js"></script>
+</body>
+</html>

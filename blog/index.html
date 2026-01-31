@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore faith-based articles, devotionals, and Christian teachings">
+    <title>Blog - GetWordWisdom</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/blog.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="/">GetWordWisdom</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/blog/" class="active">Blog</a></li>
+                <li><a href="/categories/">Categories</a></li>
+                <li><a href="/devotionals/">Devotionals</a></li>
+                <li><a href="/subscribe/">Subscribe</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <h1>Our Blog</h1>
+                <p class="subtitle">Explore articles on faith, wisdom, and Christian living</p>
+            </div>
+        </section>
+
+        <section class="blog-content">
+            <div class="container">
+                <div class="blog-filters">
+                    <label for="category-filter">Filter by Category:</label>
+                    <select id="category-filter" class="filter-select">
+                        <option value="">All Categories</option>
+                        <option value="Faith">Faith</option>
+                        <option value="Devotionals">Devotionals</option>
+                        <option value="Christian Living">Christian Living</option>
+                        <option value="Teachings">Teachings</option>
+                        <option value="Wisdom">Wisdom</option>
+                    </select>
+                </div>
+
+                <div id="posts-container" class="posts-grid">
+                    <!-- Loading skeleton -->
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+
+                <div id="posts-error" class="error-message" style="display: none;">
+                    <p>Unable to load posts. Please try again later.</p>
+                </div>
+
+                <div id="no-posts" class="info-message" style="display: none;">
+                    <p>No posts found. Check back soon for new content!</p>
+                </div>
+
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GetWordWisdom</h3>
+                    <p>Sharing faith, wisdom, and devotionals to strengthen your walk with Christ.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/categories/">Categories</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="/subscribe/">Subscribe</a></li>
+                        <li><a href="/devotionals/">Devotionals</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> GetWordWisdom. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/blog.js"></script>
+</body>
+</html>

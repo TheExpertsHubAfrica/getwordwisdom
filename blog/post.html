@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+    <title>Post - GetWordWisdom</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/post.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="/">GetWordWisdom</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/blog/" class="active">Blog</a></li>
+                <li><a href="/categories/">Categories</a></li>
+                <li><a href="/devotionals/">Devotionals</a></li>
+                <li><a href="/subscribe/">Subscribe</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article class="post-article">
+            <div id="post-loading" class="loading-container">
+                <div class="skeleton-post"></div>
+            </div>
+
+            <div id="post-error" class="error-message" style="display: none;">
+                <div class="container">
+                    <h1>Post Not Found</h1>
+                    <p>The post you're looking for doesn't exist or has been removed.</p>
+                    <a href="/blog/" class="btn btn-primary">Back to Blog</a>
+                </div>
+            </div>
+
+            <div id="post-content" style="display: none;">
+                <div class="post-header">
+                    <div class="container">
+                        <div class="post-meta">
+                            <span class="post-category" id="post-category"></span>
+                            <span class="post-date" id="post-date"></span>
+                        </div>
+                        <h1 id="post-title"></h1>
+                        <div class="post-author" id="post-author"></div>
+                    </div>
+                </div>
+
+                <div class="post-featured-image" id="post-image-container" style="display: none;">
+                    <img id="post-image" src="" alt="">
+                </div>
+
+                <div class="post-body">
+                    <div class="container">
+                        <div id="post-body-content" class="content"></div>
+
+                        <div class="post-footer">
+                            <div class="share-section">
+                                <h3>Share this post</h3>
+                                <div class="share-buttons">
+                                    <button class="share-btn twitter" id="share-twitter" aria-label="Share on Twitter">
+                                        <span>Twitter</span>
+                                    </button>
+                                    <button class="share-btn facebook" id="share-facebook" aria-label="Share on Facebook">
+                                        <span>Facebook</span>
+                                    </button>
+                                    <button class="share-btn linkedin" id="share-linkedin" aria-label="Share on LinkedIn">
+                                        <span>LinkedIn</span>
+                                    </button>
+                                    <button class="share-btn copy" id="share-copy" aria-label="Copy link">
+                                        <span>Copy Link</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="newsletter-cta-small">
+                                <h3>Stay Updated</h3>
+                                <p>Subscribe to receive our latest posts and devotionals</p>
+                                <a href="/subscribe/" class="btn btn-secondary">Subscribe Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GetWordWisdom</h3>
+                    <p>Sharing faith, wisdom, and devotionals to strengthen your walk with Christ.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/categories/">Categories</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="/subscribe/">Subscribe</a></li>
+                        <li><a href="/devotionals/">Devotionals</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> GetWordWisdom. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/post.js"></script>
+</body>
+</html>

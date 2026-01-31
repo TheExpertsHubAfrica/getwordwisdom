@@ -1,0 +1,116 @@
+/* ===================================
+   Subscribe Page Styles
+   =================================== */
+
+.subscribe-section {
+    padding: var(--spacing-xxl) 0;
+    background-color: var(--background-light);
+}
+
+.subscribe-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xxl);
+    align-items: start;
+}
+
+/* Info Section */
+.subscribe-info h1 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.lead {
+    font-size: 1.2rem;
+    color: var(--text-medium);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.6;
+}
+
+.benefits {
+    margin-bottom: var(--spacing-xl);
+}
+
+.benefits h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.benefits ul {
+    list-style: none;
+}
+
+.benefits li {
+    display: flex;
+    align-items: start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-medium);
+}
+
+.benefits li svg {
+    width: 24px;
+    height: 24px;
+    color: var(--secondary-color);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.privacy-note {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* Form Container */
+.subscribe-form-container {
+    background-color: var(--background-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.subscribe-form h2 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.subscribe-form .success-message {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.subscribe-form .success-message svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .subscribe-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .subscribe-info {
+        order: 2;
+    }
+
+    .subscribe-form-container {
+        order: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .subscribe-form-container {
+        padding: var(--spacing-md);
+    }
+
+    .lead {
+        font-size: 1.05rem;
+    }
+}

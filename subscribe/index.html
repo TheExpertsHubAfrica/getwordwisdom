@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Subscribe to GetWordWisdom newsletter for daily devotionals and faith-based content">
+    <title>Subscribe - GetWordWisdom</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/subscribe.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="/">GetWordWisdom</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/categories/">Categories</a></li>
+                <li><a href="/devotionals/">Devotionals</a></li>
+                <li><a href="/subscribe/" class="active">Subscribe</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="subscribe-section">
+            <div class="container">
+                <div class="subscribe-content">
+                    <div class="subscribe-info">
+                        <h1>Stay Connected with Faith</h1>
+                        <p class="lead">Join our community and receive inspiring content directly in your inbox.</p>
+                        
+                        <div class="benefits">
+                            <h2>What You'll Receive:</h2>
+                            <ul>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    <span>Daily devotionals to start your morning</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    <span>New articles on faith and Christian living</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    <span>Biblical teachings and wisdom</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    <span>Exclusive content for subscribers</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <p class="privacy-note">We respect your privacy. Your email will never be shared or sold. Unsubscribe anytime.</p>
+                    </div>
+
+                    <div class="subscribe-form-container">
+                        <form id="subscribe-form" class="subscribe-form">
+                            <h2>Subscribe Now</h2>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    required 
+                                    placeholder="your.email@example.com"
+                                    aria-required="true"
+                                >
+                                <span class="error-text" id="email-error"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block" id="submit-btn">
+                                <span id="btn-text">Subscribe</span>
+                                <span id="btn-loading" class="loading-spinner" style="display: none;"></span>
+                            </button>
+
+                            <div id="form-success" class="success-message" style="display: none;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <p>Thank you for subscribing! Check your inbox for a confirmation email.</p>
+                            </div>
+
+                            <div id="form-error" class="error-message" style="display: none;">
+                                <p id="error-text">Something went wrong. Please try again.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GetWordWisdom</h3>
+                    <p>Sharing faith, wisdom, and devotionals to strengthen your walk with Christ.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/categories/">Categories</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="/subscribe/">Subscribe</a></li>
+                        <li><a href="/devotionals/">Devotionals</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> GetWordWisdom. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/subscribe.js"></script>
+</body>
+</html>
