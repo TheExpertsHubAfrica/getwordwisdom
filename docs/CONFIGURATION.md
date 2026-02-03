@@ -130,7 +130,7 @@ const CONFIG = {
     // Categories (must match categories used in posts)
     CATEGORIES: [
         'Faith',
-        'Devotionals',
+        'Commentary',
         'Christian Living',
         'Teachings',
         'Wisdom'
@@ -152,7 +152,7 @@ const CONFIG = {
     POSTS_PER_PAGE: 9,
     CATEGORIES: [
         'Faith',
-        'Devotionals',
+        'Commentary',
         'Christian Living',
         'Teachings',
         'Wisdom'
@@ -183,7 +183,7 @@ const CONFIG = {
 postId: 1
 title: Welcome to GetWordWisdom
 slug: welcome-to-getwordwisdom
-content: <h2>Welcome</h2><p>We're excited to share faith, wisdom, and devotionals with you. This blog is dedicated to helping believers grow in their relationship with Christ through biblical teachings and practical wisdom.</p><blockquote>"For the Lord gives wisdom; from his mouth come knowledge and understanding." - Proverbs 2:6</blockquote>
+content: <h2>Welcome</h2><p>We're excited to share faith, wisdom, and commentary with you. This blog is dedicated to helping believers grow in their relationship with Christ through biblical teachings and practical wisdom.</p><blockquote>"For the Lord gives wisdom; from his mouth come knowledge and understanding." - Proverbs 2:6</blockquote>
 category: Faith
 featuredImage: https://via.placeholder.com/800x400/2c3e50/ffffff?text=Welcome+to+GetWordWisdom
 author: Admin
@@ -193,13 +193,13 @@ createdDate: 2024-01-15T08:00:00.000Z
 updatedDate: 2024-01-15T08:00:00.000Z
 ```
 
-**Post 2: Devotional**
+**Post 2: Commentary**
 ```
 postId: 2
 title: Morning Prayer for Strength
 slug: morning-prayer-for-strength
 content: <p>Start your day with this powerful prayer for strength and guidance.</p><p><strong>Prayer:</strong> "Lord, as I begin this new day, I ask for Your strength to face whatever comes my way. Guide my steps, guard my heart, and help me to walk in Your ways. Amen."</p><p><em>Scripture:</em> "The Lord is my strength and my shield; my heart trusts in him, and he helps me." - Psalm 28:7</p>
-category: Devotionals
+category: Commentarys
 featuredImage: https://via.placeholder.com/800x400/8b7355/ffffff?text=Morning+Prayer
 author: Admin
 status: published
@@ -249,7 +249,7 @@ admin@test.com | password123 | admin
 const CONFIG = {
     API_URL: 'http://localhost:3000/api',  // Local mock API
     POSTS_PER_PAGE: 3,  // Smaller for faster testing
-    CATEGORIES: ['Faith', 'Devotionals'],  // Limited for testing
+    CATEGORIES: ['Faith', 'Commentary'],  // Limited for testing
     STORAGE_KEYS: {
         ADMIN_TOKEN: 'gww_dev_admin_token',
         ADMIN_EMAIL: 'gww_dev_admin_email'
@@ -267,7 +267,7 @@ const CONFIG = {
     POSTS_PER_PAGE: 9,
     CATEGORIES: [
         'Faith',
-        'Devotionals',
+        'Commentary',
         'Christian Living',
         'Teachings',
         'Wisdom'
@@ -289,7 +289,7 @@ const CONFIG = {
     POSTS_PER_PAGE: 9,
     CATEGORIES: [
         'Faith',
-        'Devotionals',
+        'Commentary',
         'Christian Living',
         'Teachings',
         'Wisdom'
@@ -425,7 +425,7 @@ Dear Subscriber,
 Thank you for subscribing to GetWordWisdom!
 
 You'll now receive:
-- Daily devotionals
+- Daily commentary
 - Biblical teachings
 - Faith-building content
 - Updates on new posts

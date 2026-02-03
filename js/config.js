@@ -20,7 +20,7 @@ const CONFIG = {
     // Categories
     CATEGORIES: [
         'Faith',
-        'Devotionals',
+        'Commentary',
         'Christian Living',
         'Teachings',
         'Wisdom'

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Daily devotionals to inspire and encourage your faith journey">
-    <title>Devotionals - GetWordWisdom</title>
+    <meta name="description" content="Daily commentary to inspire and encourage your faith journey">
+    <title>Commentary - GetWordWisdom</title>
     <link rel="stylesheet" href="/styles/main.css">
-    <link rel="stylesheet" href="/styles/devotionals.css">
+    <link rel="stylesheet" href="/styles/commentary.css">
 </head>
 <body>
     <header class="site-header">
@@ -24,7 +24,8 @@
                 <li><a href="/about/">About</a></li>
                 <li><a href="/blog/">Blog</a></li>
                 <li><a href="/categories/">Categories</a></li>
-                <li><a href="/devotionals/" class="active">Devotionals</a></li>
+                <li><a href="/commentary/" class="active">Commentary</a></li>
+                <li><a href="/media/">Media</a></li>
                 <li><a href="/subscribe/">Subscribe</a></li>
                 <li><a href="/contact/">Contact</a></li>
             </ul>
@@ -34,14 +35,14 @@
     <main>
         <section class="page-hero">
             <div class="container">
-                <h1>Daily Devotionals</h1>
+                <h1>Daily Commentary</h1>
                 <p class="subtitle">Start each day with Scripture and spiritual reflection</p>
             </div>
         </section>
 
-        <section class="devotionals-content">
+        <section class="commentary-content">
             <div class="container">
-                <div id="devotionals-container" class="devotionals-grid">
+                <div id="commentary-container" class="commentary-grid">
                     <!-- Loading skeleton -->
                     <div class="skeleton-card"></div>
                     <div class="skeleton-card"></div>
@@ -51,12 +52,12 @@
                     <div class="skeleton-card"></div>
                 </div>
 
-                <div id="devotionals-error" class="error-message" style="display: none;">
-                    <p>Unable to load devotionals. Please try again later.</p>
+                <div id="commentary-error" class="error-message" style="display: none;">
+                    <p>Unable to load commentary. Please try again later.</p>
                 </div>
 
-                <div id="no-devotionals" class="info-message" style="display: none;">
-                    <p>No devotionals available at this time. Check back soon!</p>
+                <div id="no-commentary" class="info-message" style="display: none;">
+                    <p>No commentary available at this time. Check back soon!</p>
                 </div>
 
                 <div class="pagination" id="pagination">
@@ -67,8 +68,8 @@
 
         <section class="newsletter-cta">
             <div class="container">
-                <h2>Never Miss a Devotional</h2>
-                <p>Subscribe to receive daily devotionals in your inbox</p>
+                <h2>Never Miss a Commentary</h2>
+                <p>Subscribe to receive daily commentary in your inbox</p>
                 <a href="/subscribe/" class="btn btn-primary">Subscribe Now</a>
             </div>
         </section>
@@ -79,7 +80,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>GetWordWisdom</h3>
-                    <p>Sharing faith, wisdom, and devotionals to strengthen your walk with Christ.</p>
+                    <p>Sharing faith, wisdom, and commentary to strengthen your walk with Christ.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -94,7 +95,7 @@
                     <h4>Connect</h4>
                     <ul>
                         <li><a href="/subscribe/">Subscribe</a></li>
-                        <li><a href="/devotionals/">Devotionals</a></li>
+                        <li><a href="/commentary/">Commentary</a></li>
                         <li><a href="/media/">Media Gallery</a></li>
                     </ul>
                     <div class="social-links">
@@ -132,6 +133,6 @@
     <script src="/js/config.js"></script>
     <script src="/js/api.js"></script>
     <script src="/js/utils.js"></script>
-    <script src="/js/devotionals.js"></script>
+    <script src="/js/commentary.js"></script>
 </body>
 </html>

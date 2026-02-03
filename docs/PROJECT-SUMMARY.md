@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**GetWordWisdom** is a fully-featured, production-ready Christian blog platform built to share faith, wisdom, and daily devotionals with believers worldwide. The platform combines modern web technologies with the simplicity of Google's ecosystem for a cost-effective, scalable solution.
+**GetWordWisdom** is a fully-featured, production-ready Christian blog platform built to share faith, wisdom, and daily commentary with believers worldwide. The platform combines modern web technologies with the simplicity of Google's ecosystem for a cost-effective, scalable solution.
 
 > *"For the Lord gives wisdom; from his mouth come knowledge and understanding." - Proverbs 2:6*
 

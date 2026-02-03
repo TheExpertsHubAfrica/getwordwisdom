@@ -1,6 +1,6 @@
 # GetWordWisdom
 
-A premium Christian blog platform for sharing faith, wisdom, and daily devotionals. Built with vanilla HTML, CSS, and JavaScript, powered by Google Apps Script and Google Sheets as a backend.
+A premium Christian blog platform for sharing faith, wisdom, and daily commentary. Built with vanilla HTML, CSS, and JavaScript, powered by Google Apps Script and Google Sheets as a backend.
 
 ![GetWordWisdom](https://img.shields.io/badge/Christian-Blog-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -14,10 +14,10 @@ GetWordWisdom exists to share the timeless truths of God's Word with believers a
 
 ### Public Features
 - 📖 **Blog System** - Full-featured blog with categories, featured posts, and pagination
-- 🙏 **Daily Devotionals** - Dedicated section for daily spiritual content
+- 🙏 **Daily Commentary** - Dedicated section for daily spiritual content
 - 📧 **Newsletter** - Email subscription system with automated welcome emails
 - 📱 **Responsive Design** - Mobile-first design that works on all devices
-- 🔍 **Categories** - Organized content by Faith, Devotionals, Christian Living, Teachings, and Wisdom
+- 🔍 **Categories** - Organized content by Faith, Commentary, Christian Living, Teachings, and Wisdom
 - 📤 **Social Sharing** - Share posts to Twitter, Facebook, LinkedIn, or copy link
 - 📞 **Contact Form** - Easy way for visitors to reach out
 
@@ -56,8 +56,8 @@ getwordwisdom/
 │   └── post.html             # Single post view
 ├── categories/
 │   └── index.html            # Categories browser
-├── devotionals/
-│   └── index.html            # Devotionals listing
+├── commentary/
+│   └── index.html            # Commentary listing
 ├── subscribe/
 │   └── index.html            # Newsletter subscription
 ├── contact/
@@ -72,7 +72,7 @@ getwordwisdom/
 │   ├── blog.css              # Blog listing styles
 │   ├── post.css              # Single post styles
 │   ├── categories.css        # Categories page styles
-│   ├── devotionals.css       # Devotionals styles
+│   ├── commentary.css        # Commentary styles
 │   ├── subscribe.css         # Subscribe page styles
 │   ├── contact.css           # Contact form styles
 │   ├── admin-login.css       # Admin login styles
@@ -85,7 +85,7 @@ getwordwisdom/
 │   ├── blog.js               # Blog listing functionality
 │   ├── post.js               # Single post functionality
 │   ├── categories.js         # Categories functionality
-│   ├── devotionals.js        # Devotionals functionality
+│   ├── commentary.js         # Commentary functionality
 │   ├── subscribe.js          # Subscription form handling
 │   ├── contact.js            # Contact form handling
 │   ├── admin-login.js        # Admin authentication
@@ -205,7 +205,7 @@ Edit categories in `/js/config.js`:
 ```javascript
 CATEGORIES: [
     'Faith',
-    'Devotionals',
+    'Commentary',
     'Christian Living',
     'Teachings',
     'Wisdom'

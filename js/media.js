@@ -1,19 +1,42 @@
 // Media Gallery JavaScript
 
 // Configuration
-// TO ENABLE YOUTUBE API:
-// 1. Go to https://console.cloud.google.com/
-// 2. Create a new project or select existing one
-// 3. Enable YouTube Data API v3
-// 4. Create credentials (API Key)
-// 5. Restrict the API key to YouTube Data API v3
-// 6. Replace the API key below
-const YOUTUBE_API_KEY = ''; // Add your YouTube Data API v3 key here
 const YOUTUBE_HANDLE = '@thehenryquartey';
 const TIKTOK_USERNAME = 'thehenryquartey';
 
-// RSS Feed fallback for YouTube (no API key needed)
-const YOUTUBE_RSS_FEED = `https://www.youtube.com/feeds/videos.xml?user=${YOUTUBE_HANDLE.replace('@', '')}`;
+// Static YouTube video list (update this list with new videos)
+const YOUTUBE_VIDEOS = [
+    {
+        id: 'SQ4CMZrbuz0',
+        title: 'Latest Video',
+        description: 'Watch our latest content from @thehenryquartey',
+        publishedAt: '2026-02-01T00:00:00Z'
+    },
+    {
+        id: 'OVH60BZDi7I',
+        title: 'Featured Content',
+        description: 'Inspiring message from @thehenryquartey',
+        publishedAt: '2026-01-28T00:00:00Z'
+    },
+    {
+        id: '5CYmBlyeaQk',
+        title: 'Weekly Message',
+        description: 'Weekly inspiration from @thehenryquartey',
+        publishedAt: '2026-01-25T00:00:00Z'
+    },
+    {
+        id: 'yNv2h2YXph4',
+        title: 'Special Teaching',
+        description: 'Special teaching from @thehenryquartey',
+        publishedAt: '2026-01-20T00:00:00Z'
+    },
+    {
+        id: 'V5aFA6IMvYs',
+        title: 'Recent Upload',
+        description: 'Recent content from @thehenryquartey',
+        publishedAt: '2026-01-15T00:00:00Z'
+    }
+];
 
 // State
 let currentFilter = 'all';
@@ -31,8 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Navigation Toggle
 function initializeNavigation() {
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
+    const navToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
     
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', () => {
@@ -145,205 +168,21 @@ async function loadMediaContent() {
 // Fetch YouTube Videos
 async function fetchYouTubeVideos() {
     try {
-        // Method 1: Try YouTube Data API v3 if API key is provided
-        if (YOUTUBE_API_KEY && YOUTUBE_API_KEY !== '') {
-            return await fetchYouTubeWithAPI();
-        }
-        
-        // Method 2: Use RSS feed (no API key required)
-        return await fetchYouTubeWithRSS();
-        
+        // Use static video list and format for display
+        return YOUTUBE_VIDEOS.map(video => ({
+            id: video.id,
+            platform: 'youtube',
+            title: video.title,
+            description: video.description,
+            thumbnail: `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`,
+            publishedAt: video.publishedAt,
+            url: `https://www.youtube.com/watch?v=${video.id}`,
+            embedUrl: `https://www.youtube.com/embed/${video.id}`
+        }));
     } catch (error) {
-        console.error('Error fetching YouTube videos:', error);
+        console.error('Error formatting YouTube videos:', error);
         return [];
     }
-}
-
-// Fetch YouTube videos using Data API v3
-async function fetchYouTubeWithAPI() {
-    try {
-        // First, get the channel ID from the handle
-        const searchResponse = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${YOUTUBE_HANDLE}&type=channel&key=${YOUTUBE_API_KEY}`
-        );
-        
-        if (!searchResponse.ok) {
-            throw new Error('Failed to find YouTube channel');
-        }
-        
-        const searchData = await searchResponse.json();
-        
-        if (!searchData.items || searchData.items.length === 0) {
-            throw new Error('Channel not found');
-        }
-        
-        const channelId = searchData.items[0].id.channelId;
-        
-        // Now fetch videos from the channel
-        const videosResponse = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${channelId}&part=snippet,id&order=date&maxResults=50&type=video`
-        );
-        
-        if (!videosResponse.ok) {
-            throw new Error('Failed to fetch videos');
-        }
-        
-        const videosData = await videosResponse.json();
-        
-        // Get video statistics
-        const videoIds = videosData.items.map(item => item.id.videoId).join(',');
-        const statsResponse = await fetch(
-            `https://www.googleapis.com/youtube/v3/videos?key=${YOUTUBE_API_KEY}&id=${videoIds}&part=statistics,contentDetails`
-        );
-        
-        const statsData = await statsResponse.json();
-        const statsMap = {};
-        statsData.items.forEach(item => {
-            statsMap[item.id] = {
-                views: item.statistics.viewCount,
-                duration: item.contentDetails.duration
-            };
-        });
-        
-        return videosData.items.map(item => ({
-            id: item.id.videoId,
-            platform: 'youtube',
-            title: item.snippet.title,
-            thumbnail: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.medium.url,
-            publishedAt: item.snippet.publishedAt,
-            description: item.snippet.description,
-            url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-            views: statsMap[item.id.videoId]?.views || 0,
-            duration: statsMap[item.id.videoId]?.duration || ''
-        }));
-        
-    } catch (error) {
-        console.error('YouTube API error:', error);
-        throw error;
-    }
-}
-
-// Fetch YouTube videos using RSS feed (no API key required)
-async function fetchYouTubeWithRSS() {
-    try {
-        // Try multiple methods to fetch RSS feed
-        const channelUsername = YOUTUBE_HANDLE.replace('@', '');
-        
-        // Method 1: Try with allorigins proxy
-        try {
-            const corsProxy = 'https://api.allorigins.win/get?url=';
-            const rssUrl = `https://www.youtube.com/feeds/videos.xml?user=${channelUsername}`;
-            
-            const response = await fetch(corsProxy + encodeURIComponent(rssUrl));
-            
-            if (response.ok) {
-                const data = await response.json();
-                const xmlText = data.contents;
-                return parseYouTubeRSS(xmlText);
-            }
-        } catch (e) {
-            console.log('AllOrigins proxy failed, trying alternative...');
-        }
-        
-        // Method 2: Try with corsproxy.io
-        try {
-            const corsProxy = 'https://corsproxy.io/?';
-            const rssUrl = `https://www.youtube.com/feeds/videos.xml?user=${channelUsername}`;
-            
-            const response = await fetch(corsProxy + encodeURIComponent(rssUrl));
-            
-            if (response.ok) {
-                const xmlText = await response.text();
-                return parseYouTubeRSS(xmlText);
-            }
-        } catch (e) {
-            console.log('Corsproxy failed, trying direct fetch...');
-        }
-        
-        // Method 3: Try direct fetch (might work in some browsers)
-        try {
-            const rssUrl = `https://www.youtube.com/feeds/videos.xml?user=${channelUsername}`;
-            const response = await fetch(rssUrl);
-            
-            if (response.ok) {
-                const xmlText = await response.text();
-                return parseYouTubeRSS(xmlText);
-            }
-        } catch (e) {
-            console.log('Direct fetch failed');
-        }
-        
-        throw new Error('All RSS fetch methods failed');
-        
-    } catch (error) {
-        console.error('YouTube RSS error:', error);
-        throw error;
-    }
-}
-
-// Parse YouTube RSS XML
-function parseYouTubeRSS(xmlText) {
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(xmlText, 'text/xml');
-    
-    // Check for parse errors
-    const parseError = xml.querySelector('parsererror');
-    if (parseError) {
-        throw new Error('XML parsing failed');
-    }
-    
-    // Parse XML entries
-    const entries = xml.querySelectorAll('entry');
-    const videos = [];
-    
-    entries.forEach(entry => {
-        // Get video ID from yt:videoId or from link
-        let videoId = entry.querySelector('videoId')?.textContent;
-        if (!videoId) {
-            const link = entry.querySelector('link')?.getAttribute('href');
-            if (link) {
-                const match = link.match(/watch\?v=([^&]+)/);
-                if (match) videoId = match[1];
-            }
-        }
-        
-        const title = entry.querySelector('title')?.textContent;
-        const published = entry.querySelector('published')?.textContent;
-        
-        // Try different ways to get description
-        let description = entry.querySelector('media\\:description')?.textContent || 
-                         entry.querySelector('description')?.textContent || 
-                         entry.getElementsByTagName('media:description')[0]?.textContent ||
-                         '';
-        
-        // Get thumbnail - try multiple methods
-        let thumbnail = '';
-        const mediaThumbnail = entry.querySelector('media\\:thumbnail') || 
-                              entry.getElementsByTagName('media:thumbnail')[0];
-        if (mediaThumbnail) {
-            thumbnail = mediaThumbnail.getAttribute('url');
-        }
-        
-        if (!thumbnail && videoId) {
-            thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-        }
-        
-        if (videoId && title) {
-            videos.push({
-                id: videoId,
-                platform: 'youtube',
-                title: title,
-                thumbnail: thumbnail,
-                publishedAt: published,
-                description: description,
-                url: `https://www.youtube.com/watch?v=${videoId}`,
-                views: null,
-                duration: null
-            });
-        }
-    });
-    
-    return videos;
 }
 
 // Create TikTok Placeholders

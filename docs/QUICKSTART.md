@@ -147,7 +147,7 @@ npx serve .
 ### Add More Posts
 In your Google Sheet "Posts", add rows with:
 ```
-2 | Building Faith Daily | building-faith-daily | <p>How to strengthen your faith through daily practices.</p> | Devotionals | https://via.placeholder.com/800x400 | Admin | published | false | 2024-01-02T00:00:00.000Z | 2024-01-02T00:00:00.000Z
+2 | Building Faith Daily | building-faith-daily | <p>How to strengthen your faith through daily practices.</p> | Commentary | https://via.placeholder.com/800x400 | Admin | published | false | 2024-01-02T00:00:00.000Z | 2024-01-02T00:00:00.000Z
 
 3 | Christian Living Guide | christian-living-guide | <p>Practical tips for living as a Christian in modern world.</p> | Christian Living | https://via.placeholder.com/800x400 | Admin | published | false | 2024-01-03T00:00:00.000Z | 2024-01-03T00:00:00.000Z
 ```

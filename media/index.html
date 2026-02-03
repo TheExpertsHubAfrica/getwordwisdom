@@ -8,26 +8,30 @@
     <link rel="stylesheet" href="../styles/media.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <div class="logo">GetWordWisdom</div>
-            <div class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
+    <header class="site-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="/">GetWordWisdom</a>
             </div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../blog/index.html">Blog</a></li>
-                <li><a href="../devotionals/index.html">Devotionals</a></li>
-                <li><a href="../categories/index.html">Categories</a></li>
-                <li><a href="../about/index.html">About</a></li>
-                <li><a href="../contact/index.html">Contact</a></li>
-                <li><a href="index.html" class="active">Media</a></li>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/categories/">Categories</a></li>
+                <li><a href="/commentary/">Commentary</a></li>
+                <li><a href="/media/" class="active">Media</a></li>
+                <li><a href="/subscribe/">Subscribe</a></li>
+                <li><a href="/contact/">Contact</a></li>
             </ul>
-        </div>
-    </nav>
+        </nav>
+    </header>
+
+    <main>
 
     <!-- Page Header -->
     <section class="page-header">
@@ -110,6 +114,7 @@
             </div>
         </div>
     </div>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -117,13 +122,13 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>GetWordWisdom</h3>
-                    <p>Inspiring faith through biblical wisdom and devotional content.</p>
+                    <p>Inspiring faith through biblical wisdom and commentary content.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="../blog/index.html">Blog</a></li>
-                        <li><a href="../devotionals/index.html">Devotionals</a></li>
+                        <li><a href="../commentary/index.html">Commentary</a></li>
                         <li><a href="../categories/index.html">Categories</a></li>
                         <li><a href="../about/index.html">About</a></li>
                     </ul>

@@ -93,7 +93,7 @@ async function handleSubscribeSubmit(event) {
     } catch (error) {
         console.error('Subscription error:', error);
         const errorMsg = error.message === 'This email is already subscribed' 
-            ? 'This email is already part of our community! You\'ll continue to receive our devotionals.' 
+            ? 'This email is already part of our community! You\'ll continue to receive our commentary.' 
             : 'We couldn\'t complete your subscription right now. Please try again in a moment.';
         errorText.textContent = errorMsg;
         errorDiv.style.display = 'block';

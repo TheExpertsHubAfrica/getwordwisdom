@@ -80,10 +80,10 @@ Use this checklist to ensure your GetWordWisdom blog is fully set up and ready t
   - [ ] Post counts display (if any)
   - [ ] Clicking category filters blog
 
-- [ ] **Devotionals Page** (/devotionals/)
-  - [ ] Devotional posts display
+- [ ] **Commentary Page** (/commentary/)
+  - [ ] Commentary posts display
   - [ ] Pagination works
-  - [ ] Clicking devotional opens post
+  - [ ] Clicking commentary opens post
 
 - [ ] **Subscribe Page** (/subscribe/)
   - [ ] Form displays
@@ -235,10 +235,10 @@ Use this checklist to ensure your GetWordWisdom blog is fully set up and ready t
 - [ ] Added at least 3 featured posts
 - [ ] Uploaded featured images for all posts
 - [ ] Created posts in multiple categories
-- [ ] Written several devotionals
+- [ ] Written several commentary posts
 
 ### Categories
-- [ ] All 5 categories have posts (Faith, Devotionals, Christian Living, Teachings, Wisdom)
+- [ ] All 5 categories have posts (Faith, Commentary, Christian Living, Teachings, Wisdom)
 - [ ] Category descriptions match content
 - [ ] Category icons display correctly
 

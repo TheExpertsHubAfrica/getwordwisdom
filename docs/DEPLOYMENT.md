@@ -169,7 +169,7 @@ const CONFIG = {
     POSTS_PER_PAGE: 9,
     CATEGORIES: [
         'Faith',
-        'Devotionals',
+        'Commentary',
         'Christian Living',
         'Teachings',
         'Wisdom'
@@ -236,10 +236,10 @@ npx serve .
   - [ ] Click on category navigates to filtered blog
   - [ ] Post counts display correctly
 
-- [ ] **Devotionals Page** (`/devotionals/`)
+- [ ] **Commentary Page** (`/commentarys/`)
   - [ ] Devotional posts display
   - [ ] Pagination works
-  - [ ] Click on devotional navigates to post page
+  - [ ] Click on commentary navigates to post page
 
 - [ ] **Subscribe Page** (`/subscribe/`)
   - [ ] Form validation works (invalid email shows error)

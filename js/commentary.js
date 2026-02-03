@@ -1,21 +1,21 @@
 /**
- * Devotionals page functionality
- * Handles devotionals display with pagination
+ * Commentary page functionality
+ * Handles commentary display with pagination
  */
 
 let currentPage = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadDevotionals();
+    loadCommentary();
 });
 
 /**
- * Load and display devotionals
+ * Load and display commentary
  */
-async function loadDevotionals() {
-    const container = document.getElementById('devotionals-container');
-    const errorDiv = document.getElementById('devotionals-error');
-    const noDevotionalsDiv = document.getElementById('no-devotionals');
+async function loadCommentary() {
+    const container = document.getElementById('commentary-container');
+    const errorDiv = document.getElementById('commentary-error');
+    const noCommentaryDiv = document.getElementById('no-commentary');
     const paginationDiv = document.getElementById('pagination');
 
     try {
@@ -29,24 +29,24 @@ async function loadDevotionals() {
             <div class="skeleton-card"></div>
         `;
 
-        // Fetch devotionals (posts in Devotionals category)
-        const response = await API.getPostsByCategory('Devotionals', currentPage);
+        // Fetch commentary (posts in Commentary category)
+        const response = await API.getPostsByCategory('Commentary', currentPage);
         const posts = response.posts || [];
         const totalPages = response.totalPages || 1;
 
         // Hide error messages
         errorDiv.style.display = 'none';
-        noDevotionalsDiv.style.display = 'none';
+        noCommentaryDiv.style.display = 'none';
 
         if (posts.length === 0) {
-            noDevotionalsDiv.style.display = 'block';
+            noCommentaryDiv.style.display = 'block';
             container.innerHTML = '';
             paginationDiv.innerHTML = '';
             return;
         }
 
-        // Render devotionals
-        container.innerHTML = posts.map(post => createDevotionalCard(post)).join('');
+        // Render commentary
+        container.innerHTML = posts.map(post => createCommentaryCard(post)).join('');
 
         // Add click handlers
         posts.forEach((post, index) => {
@@ -62,7 +62,7 @@ async function loadDevotionals() {
         renderPagination(totalPages);
 
     } catch (error) {
-        console.error('Error loading devotionals:', error);
+        console.error('Error loading commentary:', error);
         errorDiv.style.display = 'block';
         container.innerHTML = '';
         paginationDiv.innerHTML = '';
@@ -70,27 +70,27 @@ async function loadDevotionals() {
 }
 
 /**
- * Create a devotional card HTML
+ * Create a commentary card HTML
  * @param {object} post - Post data
  * @returns {string} - HTML string
  */
-function createDevotionalCard(post) {
+function createCommentaryCard(post) {
     const imageUrl = post.featuredImage || CONFIG.DEFAULT_IMAGE;
     const excerpt = Utils.generateExcerpt(post.content, 120);
     const date = Utils.formatDate(post.createdDate);
 
     return `
-        <article class="devotional-card">
+        <article class="commentary-card">
             <img 
                 src="${imageUrl}" 
                 alt="${Utils.escapeHtml(post.title)}"
-                class="devotional-card-image"
+                class="commentary-card-image"
                 onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
             >
-            <div class="devotional-card-content">
-                <div class="devotional-card-date">${date}</div>
-                <h3 class="devotional-card-title">${Utils.escapeHtml(post.title)}</h3>
-                <p class="devotional-card-excerpt">${Utils.escapeHtml(excerpt)}</p>
+            <div class="commentary-card-content">
+                <div class="commentary-card-date">${date}</div>
+                <h3 class="commentary-card-title">${Utils.escapeHtml(post.title)}</h3>
+                <p class="commentary-card-excerpt">${Utils.escapeHtml(excerpt)}</p>
             </div>
         </article>
     `;
@@ -161,7 +161,7 @@ function renderPagination(totalPages) {
  */
 function changePage(page) {
     currentPage = page;
-    loadDevotionals();
+    loadCommentary();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 

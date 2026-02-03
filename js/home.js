@@ -16,7 +16,7 @@ function initHeroSlideshow() {
     if (backgrounds.length === 0) return;
 
     let currentIndex = 0;
-    
+
     // Show first image
     backgrounds[currentIndex].classList.add('active');
 
@@ -24,10 +24,10 @@ function initHeroSlideshow() {
     setInterval(() => {
         // Remove active class from current
         backgrounds[currentIndex].classList.remove('active');
-        
+
         // Move to next image
         currentIndex = (currentIndex + 1) % backgrounds.length;
-        
+
         // Add active class to next
         backgrounds[currentIndex].classList.add('active');
     }, 6000);
@@ -73,7 +73,7 @@ async function loadFeaturedPosts() {
                 card.addEventListener('click', () => {
                     window.location.href = `/blog/post.html?slug=${post.slug}`;
                 });
-                
+
                 // Make card keyboard accessible
                 card.setAttribute('tabindex', '0');
                 card.setAttribute('role', 'article');

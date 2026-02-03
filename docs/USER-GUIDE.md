@@ -11,7 +11,7 @@
 
 ## Platform Overview
 
-**GetWordWisdom** is a Christian blog platform designed to share faith-based content, devotionals, and spiritual teachings with your community. The platform consists of two main parts:
+**GetWordWisdom** is a Christian blog platform designed to share faith-based content, commentarys, and spiritual teachings with your community. The platform consists of two main parts:
 
 1. **Public Website** - Where readers discover and engage with content
 2. **Admin Dashboard** - Where administrators manage content and subscribers
@@ -74,15 +74,15 @@
 
 **Categories Available:**
 - Faith
-- Devotionals
+- Commentary
 - Christian Living
 - Teachings
 - Wisdom
 
-### 5. Devotionals Page (`/devotionals/`)
+### 5. Commentary Page (`/commentarys/`)
 **Specialized Section:**
-- Dedicated page for daily devotional content
-- Filtered to show only "Devotionals" category posts
+- Dedicated page for daily commentary content
+- Filtered to show only "Commentary" category posts
 - Ideal for regular spiritual nourishment
 
 ### 6. Subscribe Page (`/subscribe/`)
@@ -177,7 +177,7 @@ The Posts table displays:
    **Category*** (Required)
    - Select from dropdown:
      - Faith
-     - Devotionals
+     - Commentary
      - Christian Living
      - Teachings
      - Wisdom
@@ -426,7 +426,7 @@ If no image is uploaded, system uses default placeholder:
 - Plan content calendar in advance
 
 **Content Types:**
-- Devotionals for daily inspiration
+- Commentary for daily inspiration
 - Teachings for deeper study
 - Christian Living for practical guidance
 - Faith stories and testimonies
@@ -574,7 +574,7 @@ If no image is uploaded, system uses default placeholder:
 
 **Supported Categories:**
 - Faith
-- Devotionals
+- Commentary
 - Christian Living
 - Teachings
 - Wisdom

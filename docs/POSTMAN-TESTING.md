@@ -128,7 +128,7 @@ https://script.google.com/macros/s/AKfycbxjDELBxMngpSb7UDCQnya-fbgvkNXGptEmN6jaf
 {
   "counts": {
     "Faith": 5,
-    "Devotionals": 3,
+    "Commentary": 3,
     "Christian Living": 4,
     "Teachings": 2,
     "Wisdom": 1
