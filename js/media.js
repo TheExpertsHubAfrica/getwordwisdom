@@ -50,6 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeFilters();
     initializeModal();
     loadMediaContent();
+    
+    // Set current year in footer
+    const yearSpan = document.getElementById('current-year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
 });
 
 // Navigation Toggle
@@ -58,7 +64,8 @@ function initializeNavigation() {
     const navMenu = document.querySelector('.nav-menu');
     
     if (navToggle && navMenu) {
-        navToggle.addEventListener('click', () => {
+        navToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             navMenu.classList.toggle('active');
             navToggle.classList.toggle('active');
         });
@@ -69,6 +76,15 @@ function initializeNavigation() {
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
             }
+        });
+        
+        // Close menu when clicking a link
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
         });
     }
 }
