@@ -96,6 +96,16 @@
     color: var(--primary-color);
 }
 
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .featured-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -196,6 +206,59 @@
     margin-bottom: var(--spacing-lg);
 }
 
+/* Bible Commentary Selector Section */
+.bible-selector {
+    padding: var(--spacing-xxl) 0;
+    background-color: var(--background-white);
+}
+
+.bible-selector-grid {
+    display: grid;
+    gap: var(--spacing-xl);
+}
+
+.testament-section {
+    background-color: var(--background-light);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.testament-section h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    font-weight: 600;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--spacing-sm);
+}
+
+.book-card {
+    background-color: var(--background-white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: var(--shadow-sm);
+}
+
+.book-card:hover {
+    background-color: var(--primary-color);
+    color: var(--background-white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .hero {
@@ -226,6 +289,14 @@
     .newsletter-cta p {
         font-size: 1rem;
     }
+
+    .book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .testament-section h3 {
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -239,5 +310,15 @@
 
     .section-title {
         font-size: 1.75rem;
+    }
+
+    .book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: var(--spacing-xs);
+    }
+
+    .book-card {
+        padding: var(--spacing-sm);
+        font-size: 0.9rem;
     }
 }
