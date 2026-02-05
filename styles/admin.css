@@ -448,7 +448,8 @@
 }
 
 /* Form in Modal */
-#post-editor-form {
+#post-editor-form,
+#commentary-editor-form {
     padding: var(--spacing-xl);
     display: flex;
     flex-direction: column;
@@ -489,6 +490,7 @@
 
 .form-group input[type="text"],
 .form-group input[type="email"],
+.form-group input[type="date"],
 .form-group input[type="file"],
 .form-group select,
 .form-group textarea {
@@ -523,7 +525,8 @@
     line-height: 1.6;
 }
 
-#post-editor-form .modal-footer {
+#post-editor-form .modal-footer,
+#commentary-editor-form .modal-footer {
     margin-top: var(--spacing-xl);
     padding: var(--spacing-lg) 0 0;
     border-top: 2px solid var(--background-light);
@@ -534,7 +537,8 @@
     background-color: transparent;
 }
 
-#post-editor-form .error-message {
+#post-editor-form .error-message,
+#commentary-editor-form .error-message {
     margin-top: var(--spacing-md);
     margin-bottom: 0;
 }
