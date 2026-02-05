@@ -669,6 +669,88 @@
 }
 
 /* ===================================
+   Delete Confirmation Modal
+   =================================== */
+
+#delete-modal .modal-header {
+    background: linear-gradient(135deg, #ffebee 0%, #ffffff 100%);
+    border-bottom: 2px solid #ffcdd2;
+}
+
+#delete-modal .modal-header h2 {
+    color: var(--error-color);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+#delete-modal .modal-header h2::before {
+    content: '⚠️';
+    font-size: 1.5rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+#delete-modal .modal-body {
+    padding: var(--spacing-xl);
+    text-align: center;
+}
+
+#delete-message {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin: 0;
+    padding: var(--spacing-lg);
+    background-color: #fff3e0;
+    border-radius: var(--radius-sm);
+    text-align: left;
+}
+
+#delete-modal .modal-footer {
+    padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-xl);
+    background-color: #fafafa;
+    border-top: 2px solid #ffcdd2;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+#delete-modal .modal-footer .btn {
+    min-width: 120px;
+    font-weight: 600;
+}
+
+#delete-modal .btn-danger {
+    background-color: var(--error-color);
+    box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
+}
+
+#delete-modal .btn-danger:hover {
+    background-color: #b71c1c;
+    box-shadow: 0 4px 12px rgba(183, 28, 28, 0.4);
+    transform: translateY(-1px);
+}
+
+#delete-modal .btn-secondary {
+    background-color: var(--background-white);
+    border: 2px solid var(--border-color);
+    color: var(--text-dark);
+}
+
+#delete-modal .btn-secondary:hover {
+    background-color: var(--background-light);
+    border-color: var(--text-medium);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* ===================================
    Responsive Design
    =================================== */
 
