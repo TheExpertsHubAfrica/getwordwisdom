@@ -221,5 +221,51 @@ const API = {
      */
     async adminToggleSubscriber(token, subscriberId, status) {
         return this.postRequest('adminToggleSubscriber', { token, subscriberId, status });
+    },
+
+    /**
+     * Get all commentaries (admin)
+     * @param {string} token - Auth token
+     * @returns {Promise<object>} - All commentaries
+     */
+    async adminGetAllCommentaries(token) {
+        return this.postRequest('adminGetAllCommentaries', { token });
+    },
+
+    /**
+     * Create or update a commentary (admin)
+     * @param {string} token - Auth token
+     * @param {object} commentaryData - Commentary data
+     * @returns {Promise<object>} - Success message
+     */
+    async adminSaveCommentary(token, commentaryData) {
+        return this.postRequest('adminSaveCommentary', { token, commentaryData });
+    },
+
+    /**
+     * Delete a commentary (admin)
+     * @param {string} token - Auth token
+     * @param {string} commentaryId - Commentary ID
+     * @returns {Promise<object>} - Success message
+     */
+    async adminDeleteCommentary(token, commentaryId) {
+        return this.postRequest('adminDeleteCommentary', { token, commentaryId });
+    },
+
+    /**
+     * Get commentaries by book (public)
+     * @param {string} book - Bible book slug
+     * @returns {Promise<array>} - Commentaries for the book
+     */
+    async getCommentariesByBook(book) {
+        return this.request('getCommentariesByBook', { book });
+    },
+
+    /**
+     * Get all commentaries grouped by book (public)
+     * @returns {Promise<object>} - All commentaries grouped
+     */
+    async getAllCommentaries() {
+        return this.request('getAllCommentaries');
     }
 };

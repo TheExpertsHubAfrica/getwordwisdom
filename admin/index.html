@@ -24,6 +24,13 @@
                     </svg>
                     <span>Posts</span>
                 </a>
+                <a href="#commentaries" class="nav-link" data-section="commentaries">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                    <span>Commentaries</span>
+                </a>
                 <a href="#subscribers" class="nav-link" data-section="subscribers">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -91,6 +98,39 @@
                         <tbody id="posts-table-body">
                             <tr>
                                 <td colspan="7" class="loading-row">Loading posts...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Commentaries Section -->
+            <section id="commentaries-section" class="admin-section">
+                <div class="section-actions">
+                    <button id="create-commentary-btn" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Add New Commentary
+                    </button>
+                </div>
+
+                <div class="posts-table-container">
+                    <table class="admin-table" id="commentaries-table">
+                        <thead>
+                            <tr>
+                                <th>Book</th>
+                                <th>Chapter</th>
+                                <th>Verse</th>
+                                <th>Date</th>
+                                <th>Preview</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="commentaries-table-body">
+                            <tr>
+                                <td colspan="6" class="loading-row">Loading commentaries...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -225,6 +265,120 @@
 
                 <div id="editor-error" class="error-message" style="display: none;">
                     <p id="editor-error-text"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Commentary Editor Modal -->
+    <div id="commentary-editor-modal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 id="commentary-editor-title">Add New Commentary</h2>
+                <button class="modal-close" id="close-commentary-editor">&times;</button>
+            </div>
+            <form id="commentary-editor-form">
+                <input type="hidden" id="commentary-id" name="commentaryId">
+                
+                <div class="form-row">
+                    <div class="form-group col-half">
+                        <label for="commentary-book">Bible Book *</label>
+                        <select id="commentary-book" name="book" required>
+                            <option value="">Select Book</option>
+                            <option value="genesis">Genesis</option>
+                            <option value="exodus">Exodus</option>
+                            <option value="leviticus">Leviticus</option>
+                            <option value="numbers">Numbers</option>
+                            <option value="deuteronomy">Deuteronomy</option>
+                            <option value="joshua">Joshua</option>
+                            <option value="judges">Judges</option>
+                            <option value="ruth">Ruth</option>
+                            <option value="1-samuel">1 Samuel</option>
+                            <option value="2-samuel">2 Samuel</option>
+                            <option value="1-kings">1 Kings</option>
+                            <option value="2-kings">2 Kings</option>
+                            <option value="1-chronicles">1 Chronicles</option>
+                            <option value="2-chronicles">2 Chronicles</option>
+                            <option value="ezra">Ezra</option>
+                            <option value="nehemiah">Nehemiah</option>
+                            <option value="esther">Esther</option>
+                            <option value="job">Job</option>
+                            <option value="psalms">Psalms</option>
+                            <option value="proverbs">Proverbs</option>
+                            <option value="ecclesiastes">Ecclesiastes</option>
+                            <option value="song-of-solomon">Song of Solomon</option>
+                            <option value="isaiah">Isaiah</option>
+                            <option value="jeremiah">Jeremiah</option>
+                            <option value="lamentations">Lamentations</option>
+                            <option value="ezekiel">Ezekiel</option>
+                            <option value="daniel">Daniel</option>
+                            <option value="hosea">Hosea</option>
+                            <option value="joel">Joel</option>
+                            <option value="amos">Amos</option>
+                            <option value="obadiah">Obadiah</option>
+                            <option value="jonah">Jonah</option>
+                            <option value="micah">Micah</option>
+                            <option value="nahum">Nahum</option>
+                            <option value="habakkuk">Habakkuk</option>
+                            <option value="zephaniah">Zephaniah</option>
+                            <option value="haggai">Haggai</option>
+                            <option value="zechariah">Zechariah</option>
+                            <option value="malachi">Malachi</option>
+                            <option value="matthew">Matthew</option>
+                            <option value="mark">Mark</option>
+                            <option value="luke">Luke</option>
+                            <option value="john">John</option>
+                            <option value="acts">Acts</option>
+                            <option value="romans">Romans</option>
+                            <option value="1-corinthians">1 Corinthians</option>
+                            <option value="2-corinthians">2 Corinthians</option>
+                            <option value="galatians">Galatians</option>
+                            <option value="ephesians">Ephesians</option>
+                            <option value="philippians">Philippians</option>
+                            <option value="colossians">Colossians</option>
+                            <option value="1-thessalonians">1 Thessalonians</option>
+                            <option value="2-thessalonians">2 Thessalonians</option>
+                            <option value="1-timothy">1 Timothy</option>
+                            <option value="2-timothy">2 Timothy</option>
+                            <option value="titus">Titus</option>
+                            <option value="philemon">Philemon</option>
+                            <option value="hebrews">Hebrews</option>
+                            <option value="james">James</option>
+                            <option value="1-peter">1 Peter</option>
+                            <option value="2-peter">2 Peter</option>
+                            <option value="1-john">1 John</option>
+                            <option value="2-john">2 John</option>
+                            <option value="3-john">3 John</option>
+                            <option value="jude">Jude</option>
+                            <option value="revelation">Revelation</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-half">
+                        <label for="commentary-chapter">Chapter</label>
+                        <input type="text" id="commentary-chapter" name="chapter" placeholder="e.g., 1, 20, or leave blank for intro">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-half">
+                        <label for="commentary-verse">Verse(s)</label>
+                        <input type="text" id="commentary-verse" name="verse" placeholder="e.g., 6:26-27, 8:19, or 20">
+                    </div>
+                    <div class="form-group col-half">
+                        <label for="commentary-date">Date Written *</label>
+                        <input type="date" id="commentary-date" name="dateWritten" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="commentary-content">Commentary Content *</label>
+                    <textarea id="commentary-content" name="content" rows="15" required placeholder="Enter your commentary text here. You can include scripture references, observations, and reflections..."></textarea>
+                    <small>Write your commentary (supports line breaks and basic formatting)</small>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-commentary-editor">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-commentary-btn">Save Commentary</button>
                 </div>
             </form>
         </div>

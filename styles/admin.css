@@ -224,6 +224,15 @@
     border-bottom: 1px solid var(--border-color);
 }
 
+.admin-table td.preview-cell {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
 .admin-table tbody tr:hover {
     background-color: var(--background-light);
 }

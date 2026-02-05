@@ -1,11 +1,16 @@
 /**
  * Commentary page functionality
- * Handles commentary display with pagination
+ * Handles Bible commentary display with book filtering
  */
 
-let currentPage = 1;
+let currentBook = null;
+let allCommentaries = {};
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if book parameter is provided in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    currentBook = urlParams.get('book');
+    
     loadCommentary();
 });
 
@@ -16,7 +21,6 @@ async function loadCommentary() {
     const container = document.getElementById('commentary-container');
     const errorDiv = document.getElementById('commentary-error');
     const noCommentaryDiv = document.getElementById('no-commentary');
-    const paginationDiv = document.getElementById('pagination');
 
     try {
         // Show loading state
@@ -29,75 +33,179 @@ async function loadCommentary() {
             <div class="skeleton-card"></div>
         `;
 
-        // Fetch commentary (posts in Commentary category)
-        const response = await API.getPostsByCategory('Commentary', currentPage);
-        const posts = response.posts || [];
-        const totalPages = response.totalPages || 1;
+        // Fetch commentaries
+        let response;
+        if (currentBook) {
+            // Fetch commentaries for specific book
+            response = await API.getCommentariesByBook(currentBook);
+            allCommentaries[currentBook] = response.commentaries || [];
+        } else {
+            // Fetch all commentaries grouped by book
+            response = await API.getAllCommentaries();
+            allCommentaries = response.commentaries || {};
+        }
 
         // Hide error messages
         errorDiv.style.display = 'none';
         noCommentaryDiv.style.display = 'none';
 
-        if (posts.length === 0) {
+        // Check if we have any commentaries
+        const totalCommentaries = currentBook 
+            ? allCommentaries[currentBook]?.length || 0
+            : Object.values(allCommentaries).reduce((sum, arr) => sum + arr.length, 0);
+
+        if (totalCommentaries === 0) {
             noCommentaryDiv.style.display = 'block';
             container.innerHTML = '';
-            paginationDiv.innerHTML = '';
             return;
         }
 
-        // Render commentary
-        container.innerHTML = posts.map(post => createCommentaryCard(post)).join('');
-
-        // Add click handlers
-        posts.forEach((post, index) => {
-            const card = container.children[index];
-            if (card) {
-                card.addEventListener('click', () => {
-                    window.location.href = `/blog/post.html?slug=${post.slug}`;
-                });
-            }
-        });
-
-        // Render pagination
-        renderPagination(totalPages);
+        // Render commentaries
+        if (currentBook) {
+            renderBookCommentaries(currentBook);
+        } else {
+            renderAllCommentaries();
+        }
 
     } catch (error) {
         console.error('Error loading commentary:', error);
         errorDiv.style.display = 'block';
         container.innerHTML = '';
-        paginationDiv.innerHTML = '';
     }
 }
 
 /**
+ * Render commentaries for a specific book
+ */
+function renderBookCommentaries(book) {
+    const container = document.getElementById('commentary-container');
+    const commentaries = allCommentaries[book] || [];
+    
+    if (commentaries.length === 0) {
+        container.innerHTML = '<p class="no-commentaries">No commentaries available for this book yet.</p>';
+        return;
+    }
+
+    // Add book title
+    const bookDisplay = book.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const bookTitleHTML = `<div class="commentary-book-header"><h2>${bookDisplay}</h2></div>`;
+    
+    // Render commentary cards
+    const commentariesHTML = commentaries.map(commentary => createCommentaryCard(commentary)).join('');
+    
+    container.innerHTML = bookTitleHTML + `<div class="commentary-grid">${commentariesHTML}</div>`;
+}
+
+/**
+ * Render all commentaries grouped by book
+ */
+function renderAllCommentaries() {
+    const container = document.getElementById('commentary-container');
+    
+    const booksHTML = Object.keys(allCommentaries)
+        .sort()
+        .map(book => {
+            const commentaries = allCommentaries[book];
+            const bookDisplay = book.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            
+            return `
+                <div class="commentary-book-section">
+                    <h2 class="commentary-book-title">${bookDisplay}</h2>
+                    <div class="commentary-grid">
+                        ${commentaries.map(commentary => createCommentaryCard(commentary)).join('')}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    
+    container.innerHTML = booksHTML;
+}
+
+/**
  * Create a commentary card HTML
- * @param {object} post - Post data
+ * @param {object} commentary - Commentary data
  * @returns {string} - HTML string
  */
-function createCommentaryCard(post) {
-    const imageUrl = post.featuredImage || CONFIG.DEFAULT_IMAGE;
-    const excerpt = Utils.generateExcerpt(post.content, 120);
-    const date = Utils.formatDate(post.createdDate);
+function createCommentaryCard(commentary) {
+    const date = Utils.formatDate(commentary.dateWritten);
+    const preview = commentary.content.substring(0, 200) + (commentary.content.length > 200 ? '...' : '');
+    
+    // Format chapter and verse display
+    let reference = '';
+    if (commentary.chapter) {
+        reference = `Chapter ${commentary.chapter}`;
+        if (commentary.verse) {
+            reference += `:${commentary.verse}`;
+        }
+    } else if (commentary.verse) {
+        reference = `Verse ${commentary.verse}`;
+    } else {
+        reference = 'Introduction';
+    }
 
     return `
         <article class="commentary-card">
-            <img 
-                src="${imageUrl}" 
-                alt="${Utils.escapeHtml(post.title)}"
-                class="commentary-card-image"
-                onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
-            >
+            <div class="commentary-card-header">
+                <div class="commentary-reference">${Utils.escapeHtml(reference)}</div>
+                <div class="commentary-date">${date}</div>
+            </div>
             <div class="commentary-card-content">
-                <div class="commentary-card-date">${date}</div>
-                <h3 class="commentary-card-title">${Utils.escapeHtml(post.title)}</h3>
-                <p class="commentary-card-excerpt">${Utils.escapeHtml(excerpt)}</p>
+                <p class="commentary-text">${Utils.escapeHtml(preview)}</p>
+                <button class="btn-read-more" onclick="showCommentaryModal('${commentary.id}')">Read Full Commentary</button>
             </div>
         </article>
     `;
 }
 
 /**
- * Render pagination controls
+ * Show full commentary in modal
+ */
+function showCommentaryModal(commentaryId) {
+    // Find the commentary
+    let commentary = null;
+    for (const book in allCommentaries) {
+        const found = allCommentaries[book].find(c => c.id === commentaryId);
+        if (found) {
+            commentary = found;
+            break;
+        }
+    }
+
+    if (!commentary) return;
+
+    // Create and show modal
+    const modal = document.createElement('div');
+    modal.className = 'commentary-modal active';
+    modal.innerHTML = `
+        <div class="commentary-modal-content">
+            <button class="commentary-modal-close" onclick="this.closest('.commentary-modal').remove()">&times;</button>
+            <div class="commentary-modal-header">
+                <h3>${commentary.book.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h3>
+                <p class="commentary-modal-reference">
+                    ${commentary.chapter ? `Chapter ${commentary.chapter}` : ''}
+                    ${commentary.verse ? `:${commentary.verse}` : ''}
+                </p>
+                <p class="commentary-modal-date">${Utils.formatDate(commentary.dateWritten)}</p>
+            </div>
+            <div class="commentary-modal-body">
+                <div class="commentary-full-text">${Utils.escapeHtml(commentary.content).replace(/\n/g, '<br><br>')}</div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Close on background click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+}
+
+/**
+ * Render pagination controls (kept for compatibility, but may not be needed)
+ *
  * @param {number} totalPages - Total number of pages
  */
 function renderPagination(totalPages) {

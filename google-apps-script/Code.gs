@@ -31,6 +31,7 @@ const ALLOWED_ORIGINS = [
 const SHEET_NAMES = {
   POSTS: 'Posts',
   SUBSCRIBERS: 'Subscribers',
+  COMMENTARIES: 'Commentaries',
   ADMINS: 'Admins'
 };
 
@@ -138,6 +139,40 @@ function setupSheets() {
       Logger.log('⚠️  IMPORTANT: Change the default admin password!');
     }
     
+    // ===== CREATE COMMENTARIES SHEET =====
+    let commentariesSheet = ss.getSheetByName(SHEET_NAMES.COMMENTARIES);
+    if (commentariesSheet) {
+      Logger.log('Commentaries sheet already exists. Skipping...');
+    } else {
+      commentariesSheet = ss.insertSheet(SHEET_NAMES.COMMENTARIES);
+      const commentariesHeaders = [
+        'commentaryId',
+        'book',
+        'chapter',
+        'verse',
+        'dateWritten',
+        'content',
+        'createdDate'
+      ];
+      commentariesSheet.getRange(1, 1, 1, commentariesHeaders.length).setValues([commentariesHeaders]);
+      commentariesSheet.getRange(1, 1, 1, commentariesHeaders.length).setFontWeight('bold');
+      commentariesSheet.setFrozenRows(1);
+      
+      // Add a sample commentary
+      const sampleCommentary = [
+        '1',
+        'exodus',
+        '6',
+        '26-27',
+        new Date('2017-10-28').toISOString(),
+        'These are that Aaron and Moses, to whom the LORD said, Bring out the children of Israel from the land of Egypt according to their armies. It is interesting the double or rather triple repetition above. Initially Aaron was placed before Moses and then Moses was placed ahead. The Holy scriptures is so interesting. Subtle details you would never see if you don\'t look closely.',
+        new Date().toISOString()
+      ];
+      commentariesSheet.getRange(2, 1, 1, sampleCommentary.length).setValues([sampleCommentary]);
+      
+      Logger.log('✅ Commentaries sheet created with sample commentary');
+    }
+    
     // ===== DELETE DEFAULT SHEET =====
     const defaultSheet = ss.getSheetByName('Sheet1');
     if (defaultSheet && ss.getSheets().length > 1) {
@@ -213,6 +248,18 @@ function doPost(e) {
       case 'adminToggleSubscriber':
         return handleAdminToggleSubscriber(data);
       
+      // Commentary endpoints
+      case 'adminGetAllCommentaries':
+        return handleAdminGetAllCommentaries(data);
+      case 'adminSaveCommentary':
+        return handleAdminSaveCommentary(data);
+      case 'adminDeleteCommentary':
+        return handleAdminDeleteCommentary(data);
+      case 'getCommentariesByBook':
+        return handleGetCommentariesByBook(data);
+      case 'getAllCommentaries':
+        return handleGetAllCommentaries();
+      
       default:
         return createResponse({ error: 'Invalid action' });
     }
@@ -246,6 +293,10 @@ function doGet(e) {
         return handleGetPostsByCategory(e.parameter);
       case 'getCategoryCounts':
         return handleGetCategoryCounts();
+      case 'getCommentariesByBook':
+        return handleGetCommentariesByBook(e.parameter);
+      case 'getAllCommentaries':
+        return handleGetAllCommentaries();
       default:
         return createResponse({ error: 'Invalid action or method not allowed' });
     }
@@ -1008,4 +1059,182 @@ GetWordWisdom Team
   } catch (error) {
     Logger.log('Error sending newsletter: ' + error.toString());
   }
+}
+
+// ==================== COMMENTARY ENDPOINTS ====================
+
+/**
+ * Get all commentaries for admin
+ */
+function handleAdminGetAllCommentaries(data) {
+  if (!verifyAdminToken(data.token)) {
+    return createResponse({ error: 'Unauthorized' });
+  }
+  
+  const sheet = getSheet(SHEET_NAMES.COMMENTARIES);
+  const rows = sheet.getDataRange().getValues();
+  
+  const commentaries = rows.slice(1).map((row, index) => ({
+    id: row[0] || `commentary-${index + 1}`,
+    book: row[1],
+    chapter: row[2],
+    verse: row[3],
+    dateWritten: row[4],
+    content: row[5],
+    createdDate: row[6]
+  })).filter(c => c.book); // Filter out empty rows
+  
+  // Sort by date (newest first)
+  commentaries.sort((a, b) => new Date(b.dateWritten) - new Date(a.dateWritten));
+  
+  return createResponse({ commentaries: commentaries });
+}
+
+/**
+ * Save commentary (create or update)
+ */
+function handleAdminSaveCommentary(data) {
+  if (!verifyAdminToken(data.token)) {
+    return createResponse({ error: 'Unauthorized' });
+  }
+  
+  const sheet = getSheet(SHEET_NAMES.COMMENTARIES);
+  const commentaryData = data.commentaryData;
+  
+  if (commentaryData.commentaryId) {
+    // Update existing commentary
+    const rows = sheet.getDataRange().getValues();
+    for (let i = 1; i < rows.length; i++) {
+      if (rows[i][0] == commentaryData.commentaryId) {
+        sheet.getRange(i + 1, 1, 1, 7).setValues([[
+          commentaryData.commentaryId,
+          commentaryData.book,
+          commentaryData.chapter,
+          commentaryData.verse,
+          commentaryData.dateWritten,
+          commentaryData.content,
+          rows[i][6] // Keep original createdDate
+        ]]);
+        return createResponse({ success: true, message: 'Commentary updated successfully' });
+      }
+    }
+    return createResponse({ error: 'Commentary not found' });
+  } else {
+    // Create new commentary
+    const commentaryId = Utilities.getUuid();
+    const now = new Date().toISOString();
+    
+    sheet.appendRow([
+      commentaryId,
+      commentaryData.book,
+      commentaryData.chapter,
+      commentaryData.verse,
+      commentaryData.dateWritten,
+      commentaryData.content,
+      now
+    ]);
+    
+    return createResponse({ success: true, message: 'Commentary created successfully', commentaryId: commentaryId });
+  }
+}
+
+/**
+ * Delete commentary
+ */
+function handleAdminDeleteCommentary(data) {
+  if (!verifyAdminToken(data.token)) {
+    return createResponse({ error: 'Unauthorized' });
+  }
+  
+  const sheet = getSheet(SHEET_NAMES.COMMENTARIES);
+  const rows = sheet.getDataRange().getValues();
+  
+  for (let i = 1; i < rows.length; i++) {
+    if (rows[i][0] == data.commentaryId) {
+      sheet.deleteRow(i + 1);
+      return createResponse({ success: true, message: 'Commentary deleted successfully' });
+    }
+  }
+  
+  return createResponse({ error: 'Commentary not found' });
+}
+
+/**
+ * Get commentaries by book (public endpoint)
+ */
+function handleGetCommentariesByBook(data) {
+  const book = data.book;
+  
+  if (!book) {
+    return createResponse({ error: 'Book parameter required' });
+  }
+  
+  const sheet = getSheet(SHEET_NAMES.COMMENTARIES);
+  const rows = sheet.getDataRange().getValues();
+  
+  const commentaries = rows.slice(1).map((row, index) => ({
+    id: row[0] || `commentary-${index + 1}`,
+    book: row[1],
+    chapter: row[2],
+    verse: row[3],
+    dateWritten: row[4],
+    content: row[5],
+    createdDate: row[6]
+  })).filter(c => c.book === book);
+  
+  // Sort by chapter and verse
+  commentaries.sort((a, b) => {
+    const chapterA = parseInt(a.chapter) || 0;
+    const chapterB = parseInt(b.chapter) || 0;
+    if (chapterA !== chapterB) return chapterA - chapterB;
+    
+    // Parse verse numbers (handle ranges like "26-27")
+    const verseA = parseInt((a.verse || '').split('-')[0]) || 0;
+    const verseB = parseInt((b.verse || '').split('-')[0]) || 0;
+    return verseA - verseB;
+  });
+  
+  return createResponse({ commentaries: commentaries, book: book });
+}
+
+/**
+ * Get all commentaries grouped by book (public endpoint)
+ */
+function handleGetAllCommentaries() {
+  const sheet = getSheet(SHEET_NAMES.COMMENTARIES);
+  const rows = sheet.getDataRange().getValues();
+  
+  const commentaries = rows.slice(1).map((row, index) => ({
+    id: row[0] || `commentary-${index + 1}`,
+    book: row[1],
+    chapter: row[2],
+    verse: row[3],
+    dateWritten: row[4],
+    content: row[5],
+    createdDate: row[6]
+  })).filter(c => c.book);
+  
+  // Group by book
+  const grouped = {};
+  commentaries.forEach(commentary => {
+    if (!grouped[commentary.book]) {
+      grouped[commentary.book] = [];
+    }
+    grouped[commentary.book].push(commentary);
+  });
+  
+  // Sort each book's commentaries
+  Object.keys(grouped).forEach(book => {
+    grouped[book].sort((a, b) => {
+      const chapterA = parseInt(a.chapter) || 0;
+      const chapterB = parseInt(b.chapter) || 0;
+      if (chapterA !== chapterB) return chapterA - chapterB;
+      
+      const verseA = parseInt((a.verse || '').split('-')[0]) || 0;
+      const verseB = parseInt((b.verse || '').split('-')[0]) || 0;
+      return verseA - verseB;
+    });
+  });
+  
+  return createResponse({ commentaries: grouped });
 }

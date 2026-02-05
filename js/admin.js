@@ -7,7 +7,9 @@ let adminToken = null;
 let currentSection = 'posts';
 let allPosts = [];
 let allSubscribers = [];
+let allCommentaries = [];
 let currentEditingPost = null;
+let currentEditingCommentary = null;
 let deleteTarget = null;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,6 +42,7 @@ async function initializeAdmin() {
     initializeSidebarNavigation();
     initializeLogout();
     initializePostEditor();
+    initializeCommentaryEditor();
     initializeDeleteModal();
 
     // Load initial data
@@ -93,6 +96,7 @@ async function switchSection(section) {
     // Update page title
     const titles = {
         'posts': 'Posts Management',
+        'commentaries': 'Bible Commentaries',
         'subscribers': 'Subscribers Management'
     };
     const pageTitleElement = document.getElementById('page-title');
@@ -103,6 +107,8 @@ async function switchSection(section) {
     // Load section data
     if (section === 'posts') {
         await loadPosts();
+    } else if (section === 'commentaries') {
+        await loadCommentaries();
     } else if (section === 'subscribers') {
         await loadSubscribers();
     }
@@ -577,6 +583,9 @@ async function handleConfirmDelete() {
         if (deleteTarget.type === 'post') {
             await API.adminDeletePost(adminToken, deleteTarget.id);
             await loadPosts();
+        } else if (deleteTarget.type === 'commentary') {
+            await API.adminDeleteCommentary(adminToken, deleteTarget.id);
+            await loadCommentaries();
         }
 
         closeDeleteModal();
@@ -586,5 +595,215 @@ async function handleConfirmDelete() {
         alert('Failed to delete. Please try again.');
     } finally {
         Utils.setButtonLoading('confirm-delete', false);
+    }
+}
+
+// ==================== COMMENTARY MANAGEMENT ====================
+
+/**
+ * Initialize commentary editor
+ */
+function initializeCommentaryEditor() {
+    const createBtn = document.getElementById('create-commentary-btn');
+    const closeBtn = document.getElementById('close-commentary-editor');
+    const cancelBtn = document.getElementById('cancel-commentary-editor');
+    const form = document.getElementById('commentary-editor-form');
+
+    if (createBtn) {
+        createBtn.addEventListener('click', () => openCommentaryEditor());
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeCommentaryEditor);
+    }
+
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', closeCommentaryEditor);
+    }
+
+    if (form) {
+        form.addEventListener('submit', handleSaveCommentary);
+    }
+}
+
+/**
+ * Load all commentaries
+ */
+async function loadCommentaries() {
+    const tbody = document.getElementById('commentaries-table-body');
+    
+    try {
+        tbody.innerHTML = '<tr><td colspan="6" class="loading-row">Loading commentaries...</td></tr>';
+
+        const response = await API.adminGetAllCommentaries(adminToken);
+        allCommentaries = response.commentaries || [];
+
+        if (allCommentaries.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" class="loading-row">No commentaries yet. Add your first commentary!</td></tr>';
+            return;
+        }
+
+        // Render commentaries
+        tbody.innerHTML = allCommentaries.map(commentary => createCommentaryRow(commentary)).join('');
+
+        // Add event listeners
+        addCommentaryRowListeners();
+
+    } catch (error) {
+        console.error('Error loading commentaries:', error);
+        tbody.innerHTML = '<tr><td colspan="6" class="loading-row">Error loading commentaries. Please refresh.</td></tr>';
+    }
+}
+
+/**
+ * Create commentary table row HTML
+ * @param {object} commentary - Commentary data
+ * @returns {string} - HTML string
+ */
+function createCommentaryRow(commentary) {
+    const date = Utils.formatDate(commentary.dateWritten);
+    const preview = commentary.content.substring(0, 80) + (commentary.content.length > 80 ? '...' : '');
+    const bookDisplay = commentary.book.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const verseDisplay = commentary.verse || '-';
+
+    return `
+        <tr data-commentary-id="${commentary.id}">
+            <td>${Utils.escapeHtml(bookDisplay)}</td>
+            <td>${Utils.escapeHtml(commentary.chapter || 'Intro')}</td>
+            <td>${Utils.escapeHtml(verseDisplay)}</td>
+            <td>${date}</td>
+            <td class="preview-cell">${Utils.escapeHtml(preview)}</td>
+            <td>
+                <button class="btn btn-secondary btn-sm" data-action="edit">Edit</button>
+                <button class="btn btn-danger btn-sm" data-action="delete">Delete</button>
+            </td>
+        </tr>
+    `;
+}
+
+/**
+ * Add event listeners to commentary row buttons
+ */
+function addCommentaryRowListeners() {
+    document.querySelectorAll('#commentaries-table-body [data-action="edit"]').forEach(btn => {
+        btn.addEventListener('click', handleEditCommentary);
+    });
+
+    document.querySelectorAll('#commentaries-table-body [data-action="delete"]').forEach(btn => {
+        btn.addEventListener('click', handleDeleteCommentary);
+    });
+}
+
+/**
+ * Open commentary editor
+ * @param {object} commentary - Commentary to edit (optional)
+ */
+function openCommentaryEditor(commentary = null) {
+    const modal = document.getElementById('commentary-editor-modal');
+    const form = document.getElementById('commentary-editor-form');
+    const title = document.getElementById('commentary-editor-title');
+
+    // Reset form
+    form.reset();
+
+    if (commentary) {
+        // Edit mode
+        title.textContent = 'Edit Commentary';
+        currentEditingCommentary = commentary;
+        
+        document.getElementById('commentary-id').value = commentary.id;
+        document.getElementById('commentary-book').value = commentary.book;
+        document.getElementById('commentary-chapter').value = commentary.chapter || '';
+        document.getElementById('commentary-verse').value = commentary.verse || '';
+        document.getElementById('commentary-date').value = commentary.dateWritten.split('T')[0];
+        document.getElementById('commentary-content').value = commentary.content;
+    } else {
+        // Create mode
+        title.textContent = 'Add New Commentary';
+        currentEditingCommentary = null;
+        document.getElementById('commentary-id').value = '';
+        
+        // Set today's date as default
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('commentary-date').value = today;
+    }
+
+    modal.classList.add('active');
+}
+
+/**
+ * Close commentary editor
+ */
+function closeCommentaryEditor() {
+    const modal = document.getElementById('commentary-editor-modal');
+    modal.classList.remove('active');
+    currentEditingCommentary = null;
+}
+
+/**
+ * Handle save commentary
+ * @param {Event} event - Form submit event
+ */
+async function handleSaveCommentary(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const commentaryData = {
+        commentaryId: formData.get('commentaryId') || null,
+        book: formData.get('book'),
+        chapter: formData.get('chapter') || '',
+        verse: formData.get('verse') || '',
+        dateWritten: formData.get('dateWritten'),
+        content: formData.get('content')
+    };
+
+    const saveBtn = document.getElementById('save-commentary-btn');
+    Utils.setButtonLoading('save-commentary-btn', true);
+
+    try {
+        await API.adminSaveCommentary(adminToken, commentaryData);
+
+        // Reload commentaries
+        await loadCommentaries();
+
+        // Close modal
+        closeCommentaryEditor();
+
+    } catch (error) {
+        console.error('Error saving commentary:', error);
+        alert('Failed to save commentary. Please try again.');
+    } finally {
+        Utils.setButtonLoading('save-commentary-btn', false);
+    }
+}
+
+/**
+ * Handle edit commentary
+ * @param {Event} event - Click event
+ */
+function handleEditCommentary(event) {
+    const commentaryId = event.currentTarget.closest('tr').getAttribute('data-commentary-id');
+    const commentary = allCommentaries.find(c => c.id === commentaryId);
+    
+    if (commentary) {
+        openCommentaryEditor(commentary);
+    }
+}
+
+/**
+ * Handle delete commentary
+ * @param {Event} event - Click event
+ */
+function handleDeleteCommentary(event) {
+    const commentaryId = event.currentTarget.closest('tr').getAttribute('data-commentary-id');
+    const commentary = allCommentaries.find(c => c.id === commentaryId);
+    
+    if (commentary) {
+        const bookName = commentary.book.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        const label = `${bookName} ${commentary.chapter || 'Intro'}${commentary.verse ? ':' + commentary.verse : ''}`;
+        deleteTarget = { type: 'commentary', id: commentaryId, name: label };
+        openDeleteModal();
     }
 }
