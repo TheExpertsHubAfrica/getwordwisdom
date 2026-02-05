@@ -203,26 +203,34 @@ const Utils = {
 
     /**
      * Show loading state on button
-     * @param {string} buttonId - Button ID
+     * @param {string} buttonId - Button ID or button element
      * @param {boolean} loading - Loading state
      */
     setButtonLoading(buttonId, loading) {
-        const button = document.getElementById(buttonId);
+        const button = typeof buttonId === 'string' ? document.getElementById(buttonId) : buttonId;
         if (!button) return;
 
-        const textSpan = button.querySelector('[id$="-text"]');
-        const loadingSpan = button.querySelector('[id$="-loading"]');
+        // Store original content if not already stored
+        if (!button.dataset.originalContent) {
+            button.dataset.originalContent = button.innerHTML;
+        }
 
-        if (textSpan && loadingSpan) {
-            if (loading) {
-                button.disabled = true;
-                textSpan.style.display = 'none';
-                loadingSpan.style.display = 'inline-block';
-            } else {
-                button.disabled = false;
-                textSpan.style.display = 'inline';
-                loadingSpan.style.display = 'none';
-            }
+        if (loading) {
+            button.disabled = true;
+            button.classList.add('loading');
+            
+            // Create loading spinner
+            button.innerHTML = `
+                <svg class="button-spinner" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="spinner-track" cx="12" cy="12" r="10" fill="none" stroke-width="3"></circle>
+                    <circle class="spinner-head" cx="12" cy="12" r="10" fill="none" stroke-width="3"></circle>
+                </svg>
+                <span>Loading...</span>
+            `;
+        } else {
+            button.disabled = false;
+            button.classList.remove('loading');
+            button.innerHTML = button.dataset.originalContent;
         }
     }
 };

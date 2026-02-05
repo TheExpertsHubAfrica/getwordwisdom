@@ -327,15 +327,16 @@ async function handleToggleSubscriber(event) {
 
     const newStatus = subscriber.status === 'active' ? 'inactive' : 'active';
     
+    Utils.setButtonLoading(btn, true);
+    
     try {
-        btn.disabled = true;
         await API.adminToggleSubscriber(adminToken, subscriberId, newStatus);
         await loadSubscribers();
     } catch (error) {
         console.error('Error toggling subscriber:', error);
         alert('Failed to update subscriber status');
     } finally {
-        btn.disabled = false;
+        Utils.setButtonLoading(btn, false);
     }
 }
 

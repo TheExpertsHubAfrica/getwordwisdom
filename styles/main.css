@@ -332,6 +332,73 @@ a:hover {
     width: 100%;
 }
 
+/* Button Loading State */
+.btn.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+.btn.loading span {
+    margin-left: var(--spacing-xs);
+}
+
+.button-spinner {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    animation: spin 1s linear infinite;
+}
+
+.button-spinner .spinner-track {
+    stroke: currentColor;
+    opacity: 0.25;
+}
+
+.button-spinner .spinner-head {
+    stroke: currentColor;
+    stroke-dasharray: 50;
+    stroke-dashoffset: 25;
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+}
+
+/* White spinner for primary buttons */
+.btn-primary.loading .button-spinner .spinner-track,
+.btn-primary.loading .button-spinner .spinner-head {
+    stroke: white;
+}
+
+/* Colored spinner for secondary buttons */
+.btn-secondary.loading .button-spinner .spinner-track,
+.btn-secondary.loading .button-spinner .spinner-head {
+    stroke: var(--secondary-color);
+}
+
+/* Red spinner for danger buttons */
+.btn-danger.loading .button-spinner .spinner-track,
+.btn-danger.loading .button-spinner .spinner-head {
+    stroke: white;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 50;
+    }
+    50% {
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dashoffset: -50;
+    }
+}
+
 /* ===================================
    Forms
    =================================== */
